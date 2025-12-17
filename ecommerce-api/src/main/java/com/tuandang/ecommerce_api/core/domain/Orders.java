@@ -1,17 +1,15 @@
 package com.tuandang.ecommerce_api.core.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.AddressEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.OrderItemEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.VouchersEntity;
 import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class Order {
+@Builder
+public class Orders {
     private UUID id;
     private UUID orderCode;
     private String recipientName;
@@ -29,7 +27,7 @@ public class Order {
 
     private List<OrderItem> orderItems;
 
-    private Voucher platformVoucher;
+    private Vouchers platformVouchers;
 
-    private Voucher shippingVoucher;
+    private Vouchers shippingVouchers;
 }

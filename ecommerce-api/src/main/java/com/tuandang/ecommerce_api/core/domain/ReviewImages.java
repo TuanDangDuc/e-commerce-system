@@ -1,7 +1,10 @@
 package com.tuandang.ecommerce_api.core.domain;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
+@Builder
 public class ReviewImages {
     private UUID id;
     private String url;

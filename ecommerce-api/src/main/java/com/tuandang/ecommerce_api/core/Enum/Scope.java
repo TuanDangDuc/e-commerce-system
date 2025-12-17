@@ -1,4 +1,4 @@
-package com.tuandang.ecommerce_api.infrastructure.persistence.Enum;
+package com.tuandang.ecommerce_api.core.Enum;
 
 public enum Scope {
     shopVoucher, platformVoucher, productVoucher, categoryVoucher

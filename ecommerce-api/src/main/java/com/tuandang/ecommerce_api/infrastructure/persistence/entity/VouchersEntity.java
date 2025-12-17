@@ -1,7 +1,7 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
-import com.tuandang.ecommerce_api.infrastructure.persistence.Enum.Scope;
-import com.tuandang.ecommerce_api.infrastructure.persistence.Enum.VoucherType;
+import com.tuandang.ecommerce_api.core.Enum.Scope;
+import com.tuandang.ecommerce_api.core.Enum.VoucherType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

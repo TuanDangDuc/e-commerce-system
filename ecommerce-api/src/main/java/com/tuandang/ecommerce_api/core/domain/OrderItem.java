@@ -1,11 +1,10 @@
 package com.tuandang.ecommerce_api.core.domain;
 
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ReviewsEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.VouchersEntity;
+import lombok.Builder;
 
 import java.util.UUID;
 
+@Builder
 public class OrderItem {
     private UUID id;
 
@@ -15,7 +14,7 @@ public class OrderItem {
     private UUID trackingNumber;
     private String shippingProvider;
 
-    private Product product;
+    private Products product;
     private Reviews review;
-    private Voucher shopVoucher;
+    private Vouchers shopVouchers;
 }

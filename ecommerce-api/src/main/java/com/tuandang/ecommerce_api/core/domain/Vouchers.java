@@ -1,12 +1,14 @@
 package com.tuandang.ecommerce_api.core.domain;
 
-import com.tuandang.ecommerce_api.infrastructure.persistence.Enum.Scope;
-import com.tuandang.ecommerce_api.infrastructure.persistence.Enum.VoucherType;
+import com.tuandang.ecommerce_api.core.Enum.Scope;
+import com.tuandang.ecommerce_api.core.Enum.VoucherType;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Voucher {
+@Builder
+public class Vouchers {
     private UUID id;
 
     private UUID code;

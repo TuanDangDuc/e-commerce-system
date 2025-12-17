@@ -43,10 +43,6 @@ public class ProductsEntity {
     @JsonManagedReference
     private List<ProductImagesEntity> images;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private List<ProductOptionEntity> options;
-
     @OneToMany(
             mappedBy = "product",
             cascade = CascadeType.ALL,
@@ -55,10 +51,16 @@ public class ProductsEntity {
     @JsonManagedReference
     private List<ProductVariantsEntity> variants;
 
-    @OneToMany(
-            mappedBy = "product"
+    @ManyToMany()
+    @JoinTable(
+            name = "CategoryProduct",
+            joinColumns = {
+                @JoinColumn(name = "categoryId")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "productId")
+            }
     )
-    @JsonManagedReference
     private List<CategoryEntity> categories;
 
     @OneToMany(

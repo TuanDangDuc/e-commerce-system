@@ -1,12 +1,15 @@
 package com.tuandang.ecommerce_api.core.domain;
 
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.*;
 import jakarta.persistence.Column;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.List;
 import java.util.UUID;
 
-public class Product {
+@Builder
+@Data
+public class Products {
     private UUID id;
     private String name;
     private String type;
@@ -15,9 +18,8 @@ public class Product {
     )
     private String thumbnailUrl;
     private float basePrice;
-    private List<ProductImagesEntity> images;
-    private List<ProductOptionEntity> options;
-    private List<ProductVariantsEntity> variants;
-    private List<CategoryEntity> categories;
-    private List<ReviewsEntity> reviews;
+    private List<ProductImages> images;
+    private List<ProductVariants> variants;
+    private List<Category> categories;
+    private List<Reviews> reviews;
 }

@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,10 +21,8 @@ public class CategoryEntity {
     private UUID id;
     private String name;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "productId"
+    @ManyToMany(
+            mappedBy = "categories"
     )
-    @JsonBackReference
-    private ProductsEntity product;
+    private List<ProductsEntity> products;
 }
