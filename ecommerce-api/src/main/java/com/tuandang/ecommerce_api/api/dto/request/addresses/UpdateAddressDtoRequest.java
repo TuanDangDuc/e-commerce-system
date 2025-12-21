@@ -1,23 +1,21 @@
 package com.tuandang.ecommerce_api.api.dto.request.addresses;
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
 
 import java.util.UUID;
 
-
-public record AddressDtoRequest(
+public record UpdateAddressDtoRequest(
+        UUID id,
         UUID userId,
         String province,
         String district,
         String ward,
         String city,
         String county,
-        @NotEmpty
         String specificAddress,
-        boolean isDefault,
+        Boolean isDefault,
         String type,
-        @NotEmpty
         String phoneNumber
 ) {
+
 }

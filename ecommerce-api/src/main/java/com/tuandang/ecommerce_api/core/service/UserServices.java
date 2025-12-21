@@ -39,6 +39,20 @@ public class UserServices {
         return userRepositoryPort.findUserByUserName(userName);
     }
     public void updateUser(Users user){
+        var base =  userRepositoryPort.findUserById(user.getId());
+        if (base == null)
+            throw new AccountNotFoundException(HttpStatus.NOT_FOUND.value(), "This account does not exist!");
+        if (user.getEmail() == null)
+            user.setEmail(base.getEmail());
+        if (user.getFullName() == null)
+            user.setFullName(base.getFullName());
+        if (user.getSex() == null)
+            user.setSex(base.getSex());
+        if (user.getDateOfBirth() == null)
+            user.setDateOfBirth(base.getDateOfBirth());
+        if (user.getAvatarUrl() == null)
+            user.setAvatarUrl(base.getAvatarUrl());
+
         userRepositoryPort.updateUser(user);
     }
 

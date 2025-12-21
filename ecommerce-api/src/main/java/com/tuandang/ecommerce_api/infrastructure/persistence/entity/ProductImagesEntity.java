@@ -24,9 +24,11 @@ public class ProductImagesEntity {
     )
     private String url;
 
-    private Integer ImageOrder;
+    private Integer imageOrder;
 
-    @ManyToOne()
+    @ManyToOne(
+            cascade = CascadeType.MERGE
+    )
     @JoinColumn(
             name = "productId"
     )

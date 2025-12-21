@@ -29,8 +29,12 @@ public class AddressEntity {
     private String type;
     private String phoneNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @ManyToOne(
+            cascade = CascadeType.MERGE
+    )
+    @JoinColumn(
+            name = "userId"
+    )
     @JsonBackReference
     private UsersEntity user;
 }

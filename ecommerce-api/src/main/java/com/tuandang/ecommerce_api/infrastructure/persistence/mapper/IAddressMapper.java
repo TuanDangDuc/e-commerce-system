@@ -20,7 +20,27 @@ public class IAddressMapper {
                 .city(address.getCity())
                 .county(address.getCounty())
                 .specificAddress(address.getSpecificAddress())
-                .isDefault(address.getIsDefault())
+                .isDefault(address.isDefault())
+                .type(address.getType())
+                .phoneNumber(address.getPhoneNumber())
+                .build();
+    }
+
+    public Addresses toAddresses(
+            AddressEntity address
+    ){
+        if (address == null)
+            throw new NullPointerException("Address should not be null");
+        return Addresses.builder()
+                .id(address.getId())
+                .userId(address.getUser().getId())
+                .province(address.getProvince())
+                .district(address.getDistrict())
+                .ward(address.getWard())
+                .city(address.getCity())
+                .county(address.getCounty())
+                .specificAddress(address.getSpecificAddress())
+                .isDefault(address.isDefault())
                 .type(address.getType())
                 .phoneNumber(address.getPhoneNumber())
                 .build();

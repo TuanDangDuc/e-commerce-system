@@ -36,11 +36,11 @@ public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
     @Modifying
     @Transactional
     @Query("update UsersEntity a set " +
-            "a.email = case when :email is not null then :email else a.email end, " +
-            "a.fullName = case when :fullName is not null then :fullName else a.fullName end, " +
-            "a.sex = case when :sex is not null then :sex else a.sex end, " +
-            "a.dateOfBirth = case when :dateOfBirth is not null then cast(:dateOfBirth as timestamp) else a.dateOfBirth end, " +
-            "a.avatarUrl = case when :avatarUrl is not null then :avatarUrl else a.avatarUrl end " +
+            "a.email =  :email , " +
+            "a.fullName = :fullName,  " +
+            "a.sex = :sex, " +
+            "a.dateOfBirth =  cast(:dateOfBirth as timestamp), " +
+            "a.avatarUrl = :avatarUrl " +
             "where a.id = :id")
     public void updateUserById(
             @Param("id") UUID id,
@@ -55,4 +55,6 @@ public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
 
     @Query("select a.addresses from UsersEntity a where a.id = :id")
     public List<AddressEntity> findAddressById(UUID id);
+
+    public UsersEntity findUsersEntitiesById(UUID id);
 }

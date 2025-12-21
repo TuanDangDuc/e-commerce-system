@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,7 +49,9 @@ public class UsersEntity extends AccountsEntity {
     private Set<AddressEntity> addresses;
 
     @OneToMany(
-            mappedBy = "owner"
+            mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     @JsonManagedReference
     private Set<ShopsEntity> shops;
@@ -59,7 +63,9 @@ public class UsersEntity extends AccountsEntity {
     private Set<ShopStaffEntity> shopStaffs;
 
     @OneToMany(
-            mappedBy = "merchant"
+            mappedBy = "merchant",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     @JsonManagedReference
     private Set<ProductsEntity> products;
@@ -68,5 +74,6 @@ public class UsersEntity extends AccountsEntity {
             mappedBy = "user"
     )
     @JsonManagedReference
+    //@Fetch(FetchMode.SUBSELECT)
     private Set<OrdersEntity> orders;
 }

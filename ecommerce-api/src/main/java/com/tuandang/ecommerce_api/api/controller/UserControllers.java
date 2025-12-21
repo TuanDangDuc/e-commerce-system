@@ -70,7 +70,7 @@ public class UserControllers {
     ) {
         return userServices.login(request.userName(), request.password());
     }
-    //
+
     // display of all address for one user
     @GetMapping("/address/{userId}")
     public List<AddressesDtoResponse> getUserAddress(

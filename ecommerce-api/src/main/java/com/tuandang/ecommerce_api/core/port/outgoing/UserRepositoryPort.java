@@ -15,4 +15,5 @@ public interface UserRepositoryPort {
     public void updateUser(Users user);
     public Boolean login(String userName, String password);
     public List<Addresses> getAddressesByUserId(UUID id);
+    public Users findUserById(UUID id);
 }

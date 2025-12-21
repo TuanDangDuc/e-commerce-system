@@ -2,12 +2,14 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tuandang.ecommerce_api.core.Enum.Type;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.engine.spi.CascadeStyle;
 import org.hibernate.type.SqlTypes;
 
 import java.util.List;
@@ -23,14 +25,18 @@ public class ProductsEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
     @Column(
             columnDefinition = "TEXT"
     )
     private String thumbnailUrl;
-    private float basePrice;
-
-    @ManyToOne
+    private Float basePrice;
+    @Column(
+            columnDefinition = "TEXT"
+    )
+    private String description;
+    @ManyToOne()
     @JoinColumn(
             name = "merchantId"
     )
@@ -38,9 +44,12 @@ public class ProductsEntity {
     private UsersEntity merchant;
 
     @OneToMany(
-            mappedBy = "product"
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     @JsonManagedReference
+    @OrderColumn(name = "imageOrder")
     private List<ProductImagesEntity> images;
 
     @OneToMany(
@@ -64,7 +73,9 @@ public class ProductsEntity {
     private List<CategoryEntity> categories;
 
     @OneToMany(
-            mappedBy = "product"
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     @JsonManagedReference
     private List<ReviewsEntity> reviews;

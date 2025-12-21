@@ -69,4 +69,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
                 .map(iUserMapper::toAddresses)
                 .toList();
     }
+
+    @Override
+    public Users findUserById(
+        UUID id
+    ) {
+        return iUserMapper.toUsers(usersRepository.findUsersEntitiesById(id));
+    }
 }

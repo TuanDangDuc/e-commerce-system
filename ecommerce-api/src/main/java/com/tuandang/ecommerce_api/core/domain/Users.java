@@ -25,18 +25,18 @@ public class Users extends Accounts{
     )
     private String avatarUrl;
 
-    @Fetch(FetchMode.SUBSELECT)
+
     private List<Addresses> addresses;
 
-    @Fetch(FetchMode.SUBSELECT)
+
     private List<Shops> shops;
 
-    @Fetch(FetchMode.SUBSELECT)
+
     private List<ShopStaff> shopStaffs;
 
-    @Fetch(FetchMode.SUBSELECT)
+
     private List<Products> products;
 
-    @Fetch(FetchMode.SUBSELECT)
+
     private List<Orders> orders;
 }

@@ -1,5 +1,6 @@
 package com.tuandang.ecommerce_api.core.domain;
 
+import com.tuandang.ecommerce_api.core.Enum.Type;
 import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +13,14 @@ import java.util.UUID;
 public class Products {
     private UUID id;
     private String name;
-    private String type;
+    private Type type;
     @Column(
             columnDefinition = "TEXT"
     )
     private String thumbnailUrl;
-    private float basePrice;
+    private Float basePrice;
+    private String description;
+    private Users merchant;
     private List<ProductImages> images;
     private List<ProductVariants> variants;
     private List<Category> categories;

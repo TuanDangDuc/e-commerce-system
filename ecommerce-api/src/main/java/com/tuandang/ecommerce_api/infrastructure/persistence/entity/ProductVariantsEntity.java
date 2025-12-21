@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.yaml.snakeyaml.DumperOptions;
 
 import java.util.Map;
 import java.util.UUID;
@@ -30,7 +31,9 @@ public class ProductVariantsEntity {
     @Column(columnDefinition = "jsonb")
     private Map<String, String> options;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(
             name = "productId"
     )
