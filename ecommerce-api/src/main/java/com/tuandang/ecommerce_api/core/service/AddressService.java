@@ -6,25 +6,18 @@ import com.tuandang.ecommerce_api.core.domain.Addresses;
 import com.tuandang.ecommerce_api.core.exception.AccountNotFoundException;
 import com.tuandang.ecommerce_api.core.port.outgoing.AddressRepositoryPort;
 import com.tuandang.ecommerce_api.core.port.outgoing.UserRepositoryPort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class AddressService {
     private final AddressRepositoryPort addressRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
     private final AddressMapper addressMapper;
-    public AddressService(
-            AddressRepositoryPort addressRepositoryPort,
-            UserRepositoryPort userRepositoryPort,
-            AddressMapper addressMapper
-    ){
-        this.addressRepositoryPort = addressRepositoryPort;
-        this.userRepositoryPort = userRepositoryPort;
-        this.addressMapper = addressMapper;
-    }
 
     public void save(
             AddressDtoRequest addressDtoRequest

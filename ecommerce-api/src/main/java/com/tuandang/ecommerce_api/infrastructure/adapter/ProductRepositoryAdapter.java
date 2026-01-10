@@ -6,22 +6,17 @@ import com.tuandang.ecommerce_api.core.port.outgoing.ProductRepositoryPort;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IProductMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class ProductRepositoryAdapter implements ProductRepositoryPort {
     private final ProductRepository productRepository;
     private final IProductMapper productMapper;
-    public ProductRepositoryAdapter(
-            ProductRepository productRepository,
-            IProductMapper productMapper
-    ) {
-        this.productRepository = productRepository;
-        this.productMapper = productMapper;
-    }
 
     @Override
     public void createProduct(Products product) {

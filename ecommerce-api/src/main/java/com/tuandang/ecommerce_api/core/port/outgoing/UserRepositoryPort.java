@@ -13,7 +13,8 @@ public interface UserRepositoryPort {
     public String findFirstUserNameById(UUID id);
     public Users findUserByUserName(String userName);
     public void updateUser(Users user);
-    public Boolean login(String userName, String password);
+    public String login(String userName, String password);
     public List<Addresses> getAddressesByUserId(UUID id);
     public Users findUserById(UUID id);
+    public Users findUserByEmail(String email);
 }

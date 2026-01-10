@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
@@ -51,10 +52,15 @@ public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
             @Param("avatarUrl") String avatarUrl);
 
     @Query("select a.password from UsersEntity a where a.userName = :userName")
-    public String findPasswordByUserName(String userName);
+    public Optional<String> findPasswordByUserName(String userName);
 
     @Query("select a.addresses from UsersEntity a where a.id = :id")
     public List<AddressEntity> findAddressById(UUID id);
 
     public UsersEntity findUsersEntitiesById(UUID id);
+
+    @Query("select a.role from UsersEntity a where a.userName = :userName")
+    public String findRoleByUserName(String userName);
+
+    public UsersEntity findUsersEntitiesByEmail(String email);
 }

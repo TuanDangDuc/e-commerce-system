@@ -6,6 +6,7 @@ import com.tuandang.ecommerce_api.api.mapper.AddressMapper;
 import com.tuandang.ecommerce_api.core.domain.Addresses;
 import com.tuandang.ecommerce_api.core.service.AddressService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,17 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/addresses")
 public class AddressController {
     private final AddressService addressService;
     private final AddressMapper addressMapper;
-    public AddressController(
-            AddressService addressService,
-            AddressMapper addressMapper
-    ) {
-        this.addressService = addressService;
-        this.addressMapper = addressMapper;
-    }
     // create address
     @PostMapping
     public ResponseEntity<?> createAddress(

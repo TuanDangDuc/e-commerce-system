@@ -9,15 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IProductMapper {
-    private final IUserMapper userMapper;
-    public IProductMapper(
-            IUserMapper userMapper
-    ) {
-        this.userMapper = userMapper;
-    }
     public ProductImagesEntity toProductImagesEntity(
             ProductImages productImages
     ){
+        if  (productImages == null)
+            throw new NullPointerException("productImages should not be null!");
         return ProductImagesEntity.builder()
                 .url(productImages.getUrl())
                 .imageOrder(productImages.getImageOrder())
@@ -27,6 +23,8 @@ public class IProductMapper {
     public ProductVariantsEntity toProductVariantsEntity(
             ProductVariants variants
     ) {
+        if (variants == null)
+            throw new NullPointerException("variants should not be null!");
         return ProductVariantsEntity.builder()
                 .price(variants.getPrice())
                 .stock(variants.getStock())
@@ -36,6 +34,8 @@ public class IProductMapper {
     public CategoryEntity toCategoryEntity(
             Category category
     ) {
+        if (category == null)
+            throw new NullPointerException("category should not be null!");
         return CategoryEntity.builder()
                 .id(category.getId())
                 .name(category.getName())
@@ -44,7 +44,8 @@ public class IProductMapper {
     public ProductsEntity toProductEntity(
             Products product
     ) {
-
+        if (product == null)
+            throw new NullPointerException("product should not be null!");
         var mer = UsersEntity.builder()
                 .id(product.getMerchant().getId())
                 .build();
@@ -64,6 +65,8 @@ public class IProductMapper {
     public ProductsEntity toProductEntityWithoutUser(
             Products product
     ) {
+        if (product == null)
+            throw new NullPointerException("product should not be null!");
         return ProductsEntity.builder()
                 .name(product.getName())
                 .type(product.getType())

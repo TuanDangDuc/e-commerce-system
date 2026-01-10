@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IProductImageMapper {
-    public ProductImagesEntity toProductImagesEntity(ProductImages productImages){
+    public ProductImagesEntity toProductImagesEntity(
+            ProductImages productImages
+    ){
+        if (productImages == null)
+            throw new NullPointerException("productImages should not be null!");
         return ProductImagesEntity.builder()
                 .url(productImages.getUrl())
                 .product(ProductsEntity.builder()
@@ -20,6 +24,8 @@ public class IProductImageMapper {
     public ProductImages toProductImages(
             ProductImagesEntity productImagesEntity
     ){
+        if  (productImagesEntity == null)
+            throw new NullPointerException("productImagesEntity should not be null!");
         return ProductImages.builder()
                 .id(productImagesEntity.getId())
                 .url(productImagesEntity.getUrl())

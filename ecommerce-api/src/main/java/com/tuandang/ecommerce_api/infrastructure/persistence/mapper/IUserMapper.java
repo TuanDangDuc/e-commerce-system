@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class IUserMapper {
 
-    public UsersEntity toUsersEntity(Users user){
+    public UsersEntity toUsersEntity(Users user) {
+        if (user == null)
+            throw new NullPointerException("user should not be null");
         return UsersEntity.builder()
                 .role(user.getRole())
                 .userName(user.getUserName())
@@ -16,13 +18,15 @@ public class IUserMapper {
                 .email(user.getEmail())
                 .build();
     }
-    public Users toUsers(UsersEntity user){
+
+    public Users toUsers(UsersEntity user) {
         if (user == null)
-            throw new NullPointerException("user should not be null!");
+            return null;
 
         return Users.builder()
                 .id(user.getId())
                 .userName(user.getUserName())
+                .password(user.getPassword())
                 .role(user.getRole())
                 .email(user.getEmail())
                 .fullName(user.getFullName())
@@ -31,7 +35,10 @@ public class IUserMapper {
                 .avatarUrl(user.getAvatarUrl())
                 .build();
     }
-    public Addresses toAddresses(AddressEntity addressEntity){
+
+    public Addresses toAddresses(AddressEntity addressEntity) {
+        if (addressEntity == null)
+            throw new NullPointerException("addressEntity should not be null!");
         return Addresses.builder()
                 .userId(addressEntity.getId())
                 .province(addressEntity.getProvince())

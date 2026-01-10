@@ -8,7 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IAddressMapper {
-    public AddressEntity toAddressEntity(Addresses address){
+    public AddressEntity toAddressEntity(
+            Addresses address
+    ){
+        if  (address == null)
+            throw new NullPointerException("address should not be null!");
         var user = UsersEntity.builder()
                 .id(address.getUserId())
                 .build();

@@ -5,22 +5,17 @@ import com.tuandang.ecommerce_api.core.port.outgoing.ProductImagesRepositoryPort
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductImagesEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IProductImageMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ProductImagesRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
 @Component
+@RequiredArgsConstructor
 public class ProductImagesRepositoryAdapter implements ProductImagesRepositoryPort {
     private final ProductImagesRepository productImagesRepository;
     private final IProductImageMapper  productImageMapper;
-    public ProductImagesRepositoryAdapter(
-            ProductImagesRepository productImagesRepository,
-            IProductImageMapper productImageMapper
-    ) {
-        this.productImagesRepository = productImagesRepository;
-        this.productImageMapper = productImageMapper;
-    }
 
     @Override
     public void save(List<ProductImages> productImages) {

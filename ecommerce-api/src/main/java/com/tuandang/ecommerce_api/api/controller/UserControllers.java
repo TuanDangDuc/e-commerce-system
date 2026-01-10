@@ -10,6 +10,7 @@ import com.tuandang.ecommerce_api.api.mapper.AddressMapper;
 import com.tuandang.ecommerce_api.api.mapper.UserMapper;
 import com.tuandang.ecommerce_api.core.service.UserServices;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,22 +18,15 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserControllers {
     private final UserServices userServices;
     private final UserMapper userMapper;
     private final AddressMapper addressMapper;
-    public UserControllers(
-            UserServices userServices,
-            UserMapper userMapper,
-            AddressMapper addressMapper
-    ) {
-        this.userServices = userServices;
-        this.userMapper = userMapper;
-        this.addressMapper = addressMapper;
-    }
+
     // register
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<Void> CreateUser(
             @Valid @RequestBody RegisterUserDtoRequest request
     ){
@@ -65,7 +59,7 @@ public class UserControllers {
 
     // login
     @PostMapping("/login")
-    public Boolean Login(
+    public String Login(
             @RequestBody LoginDtoRequest request
     ) {
         return userServices.login(request.userName(), request.password());

@@ -5,23 +5,18 @@ import com.tuandang.ecommerce_api.api.dto.request.products.AddProductDtoRequest;
 import com.tuandang.ecommerce_api.api.dto.request.products.UpdateProductDtoRequest;
 import com.tuandang.ecommerce_api.api.mapper.ProductMapper;
 import com.tuandang.ecommerce_api.core.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/products")
 public class ProductController {
     private final ProductService productService;
     private final ProductMapper productMapper;
-    public ProductController(
-            ProductService productService,
-            ProductMapper productMapper
-    ) {
-        this.productService = productService;
-        this.productMapper = productMapper;
-    }
 
     // create new product
     @PostMapping

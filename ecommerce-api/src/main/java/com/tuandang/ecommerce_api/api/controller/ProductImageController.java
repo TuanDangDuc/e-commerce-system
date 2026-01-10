@@ -6,6 +6,7 @@ import com.tuandang.ecommerce_api.api.mapper.ProductImageMapper;
 import com.tuandang.ecommerce_api.core.port.outgoing.ProductRepositoryPort;
 import com.tuandang.ecommerce_api.core.service.ProductImageService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,17 +14,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/product-image")
 public class ProductImageController {
     private final ProductImageService productImageService;
     private final ProductImageMapper productImageMapper;
-    public ProductImageController(
-            ProductImageService productImageService,
-            ProductImageMapper productImageMapper
-    ) {
-        this.productImageService = productImageService;
-        this.productImageMapper = productImageMapper;
-    }
 
     // add image
     @PostMapping
