@@ -5,9 +5,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class ShopsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,9 +29,13 @@ public class ShopsEntity {
     private String status;
     @Column(columnDefinition = "TEXT")
     private String avatarUrl;
-    private float ratingAverage;
-
-    @ManyToOne
+    private Float ratingAverage;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Date createTime;
+    @ManyToOne(
+            cascade = CascadeType.MERGE
+    )
     @JoinColumn(name = "ownerId")
     @JsonBackReference
     private UsersEntity owner;

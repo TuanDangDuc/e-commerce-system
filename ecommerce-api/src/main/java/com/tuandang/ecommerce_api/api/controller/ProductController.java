@@ -4,11 +4,13 @@ import com.tuandang.ecommerce_api.api.dto.request.productImage.AddImagesDtoReque
 import com.tuandang.ecommerce_api.api.dto.request.products.AddProductDtoRequest;
 import com.tuandang.ecommerce_api.api.dto.request.products.UpdateProductDtoRequest;
 import com.tuandang.ecommerce_api.api.mapper.ProductMapper;
+import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.core.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -43,5 +45,12 @@ public class ProductController {
     ) {
         productService.updateProduct(productMapper.UpdateProductDtoToProduct(request));
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}")
+    public List<Products> getProduct(
+            @PathVariable UUID userId
+    ) {
+        return productService.findAllProductById(userId);
     }
 }

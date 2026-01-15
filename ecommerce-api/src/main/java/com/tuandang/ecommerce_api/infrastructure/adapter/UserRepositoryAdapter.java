@@ -1,9 +1,12 @@
 package com.tuandang.ecommerce_api.infrastructure.adapter;
 
 import com.tuandang.ecommerce_api.core.domain.Addresses;
+import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.core.domain.Users;
 import com.tuandang.ecommerce_api.core.port.outgoing.UserRepositoryPort;
+import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
+import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IProductMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IUserMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 public class UserRepositoryAdapter implements UserRepositoryPort {
     private final UsersRepository usersRepository;
     private final IUserMapper iUserMapper;
+    private final IProductMapper iProductMapper;
 
     @Override
     public void save(Users user) {
@@ -75,6 +79,12 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public Users findUserByEmail(String email) {
         return iUserMapper.toUsers(usersRepository.findUsersEntitiesByEmail(email));
     }
-    /// Use for Security
 
+    @Override
+    public List<Products> findAllProductById(UUID userId) {
+        return usersRepository.findProductByUserId(userId)
+                .stream()
+                .map(iProductMapper::toProduct)
+                .toList();
+    }
 }

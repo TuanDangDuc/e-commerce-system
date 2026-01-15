@@ -39,7 +39,9 @@ export const Auth = () => {
   const [jwtToken, setJwtToken] = useState("");
   const [role, setRole] = useState([]);
   const nav = useNavigate();
+  const [username, setUsername] = useState("");
   interface DecodedToken {
+    [x: string]: string;
     role: string;
   }
   useEffect(() => {
@@ -65,7 +67,8 @@ export const Auth = () => {
       }
 
       setJwtToken(token);
-
+      setUsername("SUB " + decoded.sub);
+      console.log(decoded.sub);
       const roles = decoded.role || [];
       if (roles[0].authority === "ROLE_SELLER") {
         console.log("Welcome Seller!");
@@ -91,7 +94,7 @@ export const Auth = () => {
       setJwtToken(token);
       localStorage.setItem("jwtToken", token);
       const decodedToken = jwtDecode<DecodedToken>(token);
-
+      setUsername(decodedToken.sub);
       if (response.status === 200) {
         toast({
           title: "Đăng nhập thành công!",
@@ -102,7 +105,7 @@ export const Auth = () => {
         for (const r of roles) {
           setRole(r.authority);
           if (r.authority === "ROLE_SELLER") {
-            nav("/sellerDashboard");
+            nav("/sellerDashboard", {state: {username: username || decodedToken.sub}});
             break;
           }
         }

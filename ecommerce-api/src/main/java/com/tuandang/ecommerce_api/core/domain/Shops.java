@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,8 @@ public class Shops {
     private String status;
     @Column(columnDefinition = "TEXT")
     private String avatarUrl;
-    private float ratingAverage;
+    private Float ratingAverage;
+    private Date createTime;
+    private Users owner;
     private List<ShopStaff> shopStaffs;
 }

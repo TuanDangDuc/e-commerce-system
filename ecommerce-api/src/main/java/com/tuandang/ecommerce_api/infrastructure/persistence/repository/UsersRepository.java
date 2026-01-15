@@ -1,7 +1,9 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.repository;
 
 import com.tuandang.ecommerce_api.core.Enum.Sex;
+import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.AddressEntity;
+import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -63,4 +65,8 @@ public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
     public String findRoleByUserName(String userName);
 
     public UsersEntity findUsersEntitiesByEmail(String email);
+
+
+    @Query("select a.products from UsersEntity a where a.id = :userId")
+    public List<ProductsEntity> findProductByUserId(UUID userId);
 }
