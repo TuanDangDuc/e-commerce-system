@@ -1,19 +1,19 @@
 package com.tuandang.ecommerce_api.infrastructure.adapter;
 
-import com.tuandang.ecommerce_api.core.domain.Addresses;
-import com.tuandang.ecommerce_api.core.domain.Carts;
-import com.tuandang.ecommerce_api.core.domain.Products;
-import com.tuandang.ecommerce_api.core.domain.Users;
+import com.tuandang.ecommerce_api.api.dto.response.VoucherDtoResponse;
+import com.tuandang.ecommerce_api.core.domain.*;
 import com.tuandang.ecommerce_api.core.port.outgoing.UserRepositoryPort;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.ICartMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IProductMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IUserMapper;
+import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IVoucherMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.security.PublicKey;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -25,6 +25,7 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     private final IUserMapper iUserMapper;
     private final IProductMapper iProductMapper;
     private final ICartMapper iCartMapper;
+    private final IVoucherMapper iVoucherMapper;
 
     @Override
     public void save(Users user) {
@@ -95,4 +96,13 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public Carts findCartByUserId(UUID userId) {
         return iCartMapper.toCart(usersRepository.findCartByUserId(userId));
     }
+
+    @Override
+    public List<Vouchers> getVoucherByUserId(UUID userId) {
+        return usersRepository.getVoucherByUserId(userId)
+                .stream()
+                .map(iVoucherMapper::toVoucher)
+                .toList();
+    }
+
 }

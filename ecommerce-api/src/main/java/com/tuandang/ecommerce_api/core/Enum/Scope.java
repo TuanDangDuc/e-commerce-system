@@ -1,5 +1,5 @@
 package com.tuandang.ecommerce_api.core.Enum;
 
 public enum Scope {
-    shopVoucher, platformVoucher, productVoucher, categoryVoucher
+    SHOP_VOUCHER, PLATFORM_VOUCHER, PRODUCT_VOUCHER, CATEGORY_VOUCHER
 }

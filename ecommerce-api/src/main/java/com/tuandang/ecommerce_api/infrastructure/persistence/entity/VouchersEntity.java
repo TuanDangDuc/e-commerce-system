@@ -2,10 +2,7 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 import com.tuandang.ecommerce_api.core.Enum.Scope;
 import com.tuandang.ecommerce_api.core.Enum.VoucherType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,17 +21,20 @@ public class VouchersEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID code;
+    private String code;
     private VoucherType  type;
-    private float value;
-    private float maxDiscountAmount;
-    private float minOrderValue;
+    private Float value;
+    private Float maxDiscountAmount;
+    private Float minOrderValue;
     private LocalDateTime startAt;
     private LocalDateTime endAt;
     private Integer usageLimit;
     private Integer usedCount;
-    private boolean isActive;
+    private Boolean isActive;
     private Scope scope;
 
-
+    @ManyToOne(
+            cascade = CascadeType.MERGE
+    )
+    private UsersEntity seller;
 }

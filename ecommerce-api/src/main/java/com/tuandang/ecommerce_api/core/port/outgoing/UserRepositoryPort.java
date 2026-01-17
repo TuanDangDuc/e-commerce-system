@@ -1,9 +1,7 @@
 package com.tuandang.ecommerce_api.core.port.outgoing;
 
-import com.tuandang.ecommerce_api.core.domain.Addresses;
-import com.tuandang.ecommerce_api.core.domain.Carts;
-import com.tuandang.ecommerce_api.core.domain.Products;
-import com.tuandang.ecommerce_api.core.domain.Users;
+import com.tuandang.ecommerce_api.api.dto.response.VoucherDtoResponse;
+import com.tuandang.ecommerce_api.core.domain.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,4 +21,7 @@ public interface UserRepositoryPort {
     public List<Products> findAllProductById(UUID userId);
 
     public Carts findCartByUserId(UUID userId);
+
+    public List<Vouchers> getVoucherByUserId(UUID userId);
+
 }

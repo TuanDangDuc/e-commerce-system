@@ -2,6 +2,7 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.nimbusds.openid.connect.sdk.assurance.evidences.Voucher;
 import com.tuandang.ecommerce_api.core.Enum.Role;
 import com.tuandang.ecommerce_api.core.Enum.Sex;
 import jakarta.persistence.*;
@@ -83,4 +84,11 @@ public class UsersEntity extends AccountsEntity {
             orphanRemoval = true
     )
     private CartsEntity carts;
+
+    @OneToMany(
+            mappedBy = "seller",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<VouchersEntity> vouchers;
 }

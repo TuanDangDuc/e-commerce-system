@@ -25,7 +25,7 @@ public class OrdersEntity {
     private String recipientName;
     private String recipientPhone;
     @OneToOne
-    private AddressEntity shippingAaddress;
+    private AddressEntity shippingAddress;
     @Column(columnDefinition = "TEXT")
     private String note;
     private float subtotal;

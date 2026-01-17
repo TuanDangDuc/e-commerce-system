@@ -3,10 +3,8 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.repository;
 import com.tuandang.ecommerce_api.core.Enum.Sex;
 import com.tuandang.ecommerce_api.core.domain.Carts;
 import com.tuandang.ecommerce_api.core.domain.Products;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.AddressEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.CartsEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
+import com.tuandang.ecommerce_api.core.domain.Vouchers;
+import com.tuandang.ecommerce_api.infrastructure.persistence.entity.*;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -73,4 +71,7 @@ public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
 
     @Query("select a.carts from UsersEntity a where a.id = :userId")
     public CartsEntity findCartByUserId(UUID userId);
+
+    @Query("select a.vouchers from UsersEntity a where a.id = :userId")
+    public List<VouchersEntity> getVoucherByUserId(UUID userId);
 }

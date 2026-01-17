@@ -26,18 +26,10 @@ public class Users extends Accounts{
     )
     private String avatarUrl;
 
-
     private List<Addresses> addresses;
-
-
     private List<Shops> shops;
-
-
     private List<ShopStaff> shopStaffs;
-
-
     private List<Products> products;
-
-
     private List<Orders> orders;
+    private List<Vouchers> vouchers;
 }
