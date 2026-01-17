@@ -28,6 +28,8 @@ public class CartItemEntity {
     @JsonBackReference
     private CartsEntity cart;
 
-    @OneToOne
-    private ProductsEntity product;
+    @OneToOne(
+            cascade = CascadeType.MERGE
+    )
+    private ProductVariantsEntity productVariants;
 }

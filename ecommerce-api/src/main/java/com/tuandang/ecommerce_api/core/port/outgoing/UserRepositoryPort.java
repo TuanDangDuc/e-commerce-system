@@ -1,6 +1,7 @@
 package com.tuandang.ecommerce_api.core.port.outgoing;
 
 import com.tuandang.ecommerce_api.core.domain.Addresses;
+import com.tuandang.ecommerce_api.core.domain.Carts;
 import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.core.domain.Users;
 
@@ -20,4 +21,6 @@ public interface UserRepositoryPort {
     public Users findUserByEmail(String email);
 
     public List<Products> findAllProductById(UUID userId);
+
+    public Carts findCartByUserId(UUID userId);
 }

@@ -76,4 +76,11 @@ public class UsersEntity extends AccountsEntity {
     @JsonManagedReference
     //@Fetch(FetchMode.SUBSELECT)
     private Set<OrdersEntity> orders;
+
+    @OneToOne(
+            mappedBy = "cartOwner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private CartsEntity carts;
 }

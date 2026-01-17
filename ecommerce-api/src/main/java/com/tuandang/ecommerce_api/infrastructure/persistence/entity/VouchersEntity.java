@@ -32,6 +32,7 @@ public class VouchersEntity {
     private LocalDateTime startAt;
     private LocalDateTime endAt;
     private Integer usageLimit;
+    private Integer usedCount;
     private boolean isActive;
     private Scope scope;
 

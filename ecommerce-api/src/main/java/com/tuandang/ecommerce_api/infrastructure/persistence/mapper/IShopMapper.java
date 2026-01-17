@@ -2,7 +2,6 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.mapper;
 
 import com.tuandang.ecommerce_api.core.domain.Shops;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ShopsEntity;
-import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

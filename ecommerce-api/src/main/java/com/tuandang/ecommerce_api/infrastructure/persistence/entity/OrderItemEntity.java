@@ -26,7 +26,7 @@ public class OrderItemEntity {
     private String shippingProvider;
 
     @OneToOne
-    private ProductsEntity product;
+    private ProductVariantsEntity productVariants;
 
     @OneToOne
     private ReviewsEntity review;

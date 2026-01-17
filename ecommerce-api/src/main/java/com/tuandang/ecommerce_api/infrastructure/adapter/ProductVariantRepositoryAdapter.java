@@ -7,6 +7,8 @@ import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ProductV
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class ProductVariantRepositoryAdapter implements ProductVariantRepositoryPort {
@@ -14,11 +16,25 @@ public class ProductVariantRepositoryAdapter implements ProductVariantRepository
     private final IProductVariantMapper productVariantMapper;
 
     @Override
-    public void createProductVariant(
+    public void save(
             ProductVariants productVariants
     ) {
         if (productVariants == null)
             throw new NullPointerException("productVariants should not be null");
         productVariantsRepository.save(productVariantMapper.toEntity(productVariants));
+    }
+
+    @Override
+    public void deleteById(
+            UUID id
+    ) {
+        productVariantsRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveCustom(ProductVariants productVariants) {
+        if (productVariants == null)
+            throw new NullPointerException("productVariants should not be null");
+        productVariantsRepository.saveCustom(productVariantMapper.toEntity(productVariants));
     }
 }

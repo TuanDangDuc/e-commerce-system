@@ -17,4 +17,5 @@ public class ProductVariants {
     private float price;
     private Integer stock;
     private Map<String, String> options;
+    private Products product;
 }

@@ -1,5 +1,6 @@
 package com.tuandang.ecommerce_api.core.service;
 
+import com.tuandang.ecommerce_api.core.domain.ProductVariants;
 import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.core.port.outgoing.ProductRepositoryPort;
 import com.tuandang.ecommerce_api.core.port.outgoing.UserRepositoryPort;
@@ -47,5 +48,9 @@ public class ProductService {
 
     public List<Products> findAllProductById(UUID userId) {
          return userRepositoryPort.findAllProductById(userId);
+    }
+
+    public List<ProductVariants> getProductVariantsById(UUID id) {
+        return productRepositoryPort.findProductVariantById(id);
     }
 }

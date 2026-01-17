@@ -20,9 +20,11 @@ public class CartsEntity {
     @GeneratedValue(strategy = GenerationType.UUID  )
     private UUID id;
 
-    @OneToOne
+    @OneToOne(
+            cascade = CascadeType.MERGE
+    )
     private UsersEntity cartOwner;
-
+    private Float totalCost;
     @OneToMany(
             mappedBy = "cart",
             cascade = CascadeType.ALL,
@@ -30,7 +32,4 @@ public class CartsEntity {
     )
     @JsonManagedReference
     private List<CartItemEntity> cartItems;
-
-
-
 }

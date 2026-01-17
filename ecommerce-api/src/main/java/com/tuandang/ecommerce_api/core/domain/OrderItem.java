@@ -14,7 +14,7 @@ public class OrderItem {
     private UUID trackingNumber;
     private String shippingProvider;
 
-    private Products product;
+    private ProductVariants productVariant;
     private Reviews review;
     private Vouchers shopVouchers;
 }

@@ -32,7 +32,7 @@ public class ProductVariantsEntity {
     private Map<String, String> options;
 
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(
             name = "productId"

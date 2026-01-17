@@ -1,15 +1,18 @@
 package com.tuandang.ecommerce_api.infrastructure.adapter;
 
 import com.tuandang.ecommerce_api.api.mapper.ProductMapper;
+import com.tuandang.ecommerce_api.core.domain.ProductVariants;
 import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.core.port.outgoing.ProductRepositoryPort;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IProductMapper;
+import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.IProductVariantMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.query.NativeQuery;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -17,6 +20,7 @@ import java.util.UUID;
 public class ProductRepositoryAdapter implements ProductRepositoryPort {
     private final ProductRepository productRepository;
     private final IProductMapper productMapper;
+    private final IProductVariantMapper productVariantMapper;
 
     @Override
     public void createProduct(Products product) {
@@ -39,4 +43,11 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
                 .orElseThrow(() -> new NullPointerException("Product not found"));
     }
 
+    @Override
+    public List<ProductVariants> findProductVariantById(UUID id) {
+        return productRepository.findProductVariantByProductId(id)
+                .stream()
+                .map(productVariantMapper::toProductVariants)
+                .toList();
+    }
 }
