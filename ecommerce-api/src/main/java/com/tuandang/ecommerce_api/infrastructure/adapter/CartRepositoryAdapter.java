@@ -31,4 +31,22 @@ public class CartRepositoryAdapter implements CartRepositoryPort {
                 .map(cartItemMapper::toCartItem)
                 .toList();
     }
+
+    @Override
+    public void saveTotalCostOfCartByUserId(UUID userId, Float totalCost) {
+        cartsRepository.saveTotalCostOfCartByUserId(userId, totalCost);
+    }
+
+    @Override
+    public Carts getCartByUserId(UUID userId) {
+        return cartMapper.toCart(cartsRepository.getCartsEntitiesByUserId(userId));
+    }
+
+    @Override
+    public List<CartItem> findAllCartItemByUserId(UUID userId) {
+        return cartsRepository.getAllCartItemByUserId(userId)
+                .stream()
+                .map(cartItemMapper::toCartItem)
+                .toList();
+    }
 }

@@ -17,6 +17,7 @@ public class CartService {
     private final CartRepositoryPort  cartRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
 
+
     public void createCart(UUID userId) {
         Carts cart = userRepositoryPort.findCartByUserId(userId);
         if (cart != null)
@@ -30,5 +31,20 @@ public class CartService {
 
     public List<CartItem> findAllCartItemById(UUID cartId) {
         return cartRepositoryPort.findAllCartItemById(cartId);
+    }
+
+    public List<CartItem> findAllCartItemByUserId(UUID userId) {
+        return cartRepositoryPort.findAllCartItemByUserId(userId);
+    }
+
+    public Carts getCart(UUID userId) {
+        Carts cart = new Carts();
+        cart.setCartItems(findAllCartItemByUserId(userId));
+        Float totalCost = cart.CalculateTotalPrice();
+
+        cartRepositoryPort.saveTotalCostOfCartByUserId(userId, totalCost);
+        return Carts.builder()
+                .totalCost(totalCost)
+                .build();
     }
 }
