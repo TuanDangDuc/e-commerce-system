@@ -32,10 +32,6 @@ public class CartRepositoryAdapter implements CartRepositoryPort {
                 .toList();
     }
 
-    @Override
-    public void saveTotalCostOfCartByUserId(UUID userId, Float totalCost) {
-        cartsRepository.saveTotalCostOfCartByUserId(userId, totalCost);
-    }
 
     @Override
     public Carts getCartByUserId(UUID userId) {

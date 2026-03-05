@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://103.47.225.125:9099/postgres
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        type:
+          json_format_mapper: jackson
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 429881396256-4pqmnko5f1p80110035battgd6mtgo84.apps.googleusercontent.com
+            client-secret: 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
+          github:
+            client-id: Ov23litvqehsx6MqGqQa
+            client-secret: dd6d750ffec014fb9eeabc2a2c955c089108f020
+app:
+  oauth2:
+    redirect-uri: http://localhost:5173/oauth2/redirect
+
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+

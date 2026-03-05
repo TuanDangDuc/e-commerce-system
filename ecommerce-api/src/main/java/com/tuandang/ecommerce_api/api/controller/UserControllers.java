@@ -36,7 +36,7 @@ public class UserControllers {
     // change password
     @PatchMapping("/change-password")
     public ResponseEntity<Void> ChangePassword(
-            @RequestBody ChangePasswordDtoRequest request
+            @Valid @RequestBody ChangePasswordDtoRequest request
     ){
       userServices.changePassword(request.userName(), request.password());
       return ResponseEntity.ok().build();
@@ -51,7 +51,7 @@ public class UserControllers {
     // modify user
     @PutMapping
     public ResponseEntity<Void> UpdateUser(
-            @RequestBody UpdateUserDtoRequest request
+            @Valid @RequestBody UpdateUserDtoRequest request
     ) {
         userServices.updateUser(userMapper.toUsersUpdate(request));
         return ResponseEntity.ok().build();
@@ -60,19 +60,16 @@ public class UserControllers {
     // login
     @PostMapping("/login")
     public String Login(
-            @RequestBody LoginDtoRequest request
+            @Valid @RequestBody LoginDtoRequest request
     ) {
         return userServices.login(request.userName(), request.password());
     }
 
-    // display of all address for one user
-    @GetMapping("/address/{userId}")
-    public List<AddressesDtoResponse> getUserAddress(
-            @PathVariable("userId") UUID userId
+    @PatchMapping("/change-role/{userId}")
+    public ResponseEntity<?> ChangeRole(
+            @PathVariable UUID userId
     ) {
-        return userServices.getAddressesByUserId(userId)
-                .stream()
-                .map(addressMapper::toAddressDtoResponse)
-                .toList();
+        userServices.changeRole(userId);
+        return ResponseEntity.ok().build();
     }
 }

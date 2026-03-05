@@ -1,6 +1,7 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.tuandang.ecommerce_api.core.Enum.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,12 +21,17 @@ public class OrderItemEntity {
     private UUID id;
 
     private Integer quantity;
-    private float priceAtPurchase;
-    private String status;
+    private Float priceAtPurchase;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
     private UUID trackingNumber;
     private String shippingProvider;
-
-    @OneToOne
+    private UUID shopId;
+    @ManyToOne()
+    @JoinColumn(
+            name = "productVariantsId"
+    )
+    @JsonBackReference
     private ProductVariantsEntity productVariants;
 
     @OneToOne
@@ -38,9 +44,10 @@ public class OrderItemEntity {
     @JsonBackReference
     private OrdersEntity order;
 
-    @OneToOne
+    @ManyToOne()
+    @JoinColumn(
+            name = "shopVoucherId"
+    )
+    @JsonBackReference
     private VouchersEntity shopVoucher;
-
-
-
 }

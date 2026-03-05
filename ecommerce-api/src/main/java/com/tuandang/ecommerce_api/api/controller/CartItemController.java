@@ -7,6 +7,7 @@ import com.tuandang.ecommerce_api.api.mapper.CartItemMapper;
 import com.tuandang.ecommerce_api.core.domain.CartItem;
 import com.tuandang.ecommerce_api.core.service.CartItemService;
 import com.tuandang.ecommerce_api.core.service.CartService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +26,7 @@ public class CartItemController {
     @PostMapping
     @PreAuthorize("hasRole('SELLER') or hasRole('BUYER')")
     public ResponseEntity<?> save(
-            @RequestBody CartItemDtoRequest request
+            @Valid @RequestBody CartItemDtoRequest request
     ) {
         cartItemService.save(cartItemMapper.toCartItem(request));
         return ResponseEntity.ok().build();
@@ -34,7 +35,7 @@ public class CartItemController {
     @PatchMapping
     @PreAuthorize("hasRole('SELLER') or hasRole('BUYER')")
     public ResponseEntity<?> updateQuantity(
-            @RequestBody UpdateCartItemDtoRequest request
+            @Valid @RequestBody UpdateCartItemDtoRequest request
     ) {
         cartItemService.updateQuantityById(cartItemMapper.toUpdateQuantityCartItem(request));
         return ResponseEntity.ok().build();

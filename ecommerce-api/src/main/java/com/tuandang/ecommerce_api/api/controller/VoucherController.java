@@ -8,6 +8,7 @@ import com.tuandang.ecommerce_api.api.dto.response.VoucherDtoResponse;
 import com.tuandang.ecommerce_api.api.mapper.VoucherMapper;
 import com.tuandang.ecommerce_api.core.service.UserServices;
 import com.tuandang.ecommerce_api.core.service.VoucherService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,12 +23,11 @@ import java.util.UUID;
 public class VoucherController {
     private final VoucherService voucherService;
     private final VoucherMapper voucherMapper;
-    private final UserServices userServices;
 
     @PostMapping
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> createVoucher(
-            @RequestBody VoucherDtoRequest request
+            @Valid @RequestBody VoucherDtoRequest request
     ) {
         voucherService.save(voucherMapper.toVoucher(request));
         return ResponseEntity.ok().build();
@@ -36,7 +36,7 @@ public class VoucherController {
     @PatchMapping("/active")
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> updateActiveVoucher(
-            @RequestBody UpdateActiveVoucherDtoRequest request
+            @Valid @RequestBody UpdateActiveVoucherDtoRequest request
     ) {
         voucherService.updateActiveVoucher(voucherMapper.toVoucher(request));
         return ResponseEntity.ok().build();
@@ -45,7 +45,7 @@ public class VoucherController {
     @PatchMapping("/scope")
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> updateVoucherScope(
-            @RequestBody UpdateScopeVoucherDtoRequest request
+            @Valid @RequestBody UpdateScopeVoucherDtoRequest request
     ) {
         voucherService.updateScopeVoucher(voucherMapper.toVoucher(request));
         return  ResponseEntity.ok().build();
@@ -54,18 +54,18 @@ public class VoucherController {
     @PatchMapping("/type")
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> updateTypeVoucher(
-            @RequestBody UpdateTypeVoucherDtoRequest request
+            @Valid @RequestBody UpdateTypeVoucherDtoRequest request
     ) {
         voucherService.updateTypeVoucher(voucherMapper.toVoucher(request));
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{shopId}")
     @PreAuthorize("hasRole('SELLER')")
     public List<VoucherDtoResponse> getVoucher(
-            @PathVariable UUID userId
+            @PathVariable UUID shopId
     ) {
-        return userServices.getVoucherByUserId(userId)
+        return voucherService.getAllVoucherByShopId(shopId)
                 .stream()
                 .map(voucherMapper::toVoucherDtoResponse)
                 .toList();
@@ -79,4 +79,8 @@ public class VoucherController {
         voucherService.deleteVoucherById(id);
         return ResponseEntity.ok().build();
     }
+//
+//    // check voucher
+//    @PostMapping
+//    public String
 }

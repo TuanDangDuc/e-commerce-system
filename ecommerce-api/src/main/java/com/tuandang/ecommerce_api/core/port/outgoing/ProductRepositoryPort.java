@@ -14,4 +14,6 @@ public interface ProductRepositoryPort {
     public ProductsEntity findById(UUID id);
 
     public List<ProductVariants> findProductVariantById(UUID id);
+
+    public List<Products> findAllProductByShopId(UUID shopId);
 }

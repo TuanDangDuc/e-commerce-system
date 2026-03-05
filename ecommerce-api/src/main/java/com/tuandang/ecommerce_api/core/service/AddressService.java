@@ -1,6 +1,7 @@
 package com.tuandang.ecommerce_api.core.service;
 
 import com.tuandang.ecommerce_api.api.dto.request.addresses.AddressDtoRequest;
+import com.tuandang.ecommerce_api.api.dto.response.AddressesDtoResponse;
 import com.tuandang.ecommerce_api.api.mapper.AddressMapper;
 import com.tuandang.ecommerce_api.core.domain.Addresses;
 import com.tuandang.ecommerce_api.core.exception.AccountNotFoundException;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -59,5 +61,9 @@ public class AddressService {
         if (addresses.getPhoneNumber().isEmpty())
             addresses.setPhoneNumber(base.getPhoneNumber());
         addressRepositoryPort.update(addresses);
+    }
+
+    public List<Addresses> findAllAddressByUserId(UUID userId) {
+        return addressRepositoryPort.findAllAddressByUserId(userId);
     }
 }

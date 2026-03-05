@@ -23,4 +23,8 @@ public class ProductVariantService {
     public void update(ProductVariants productVariants) {
         productVariantRepositoryPort.saveCustom(productVariants);
     }
+
+    public void updateStock(UUID id, Integer quantity) {
+        productVariantRepositoryPort.updateStock(id, quantity);
+    }
 }

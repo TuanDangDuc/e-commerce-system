@@ -30,6 +30,7 @@ public class AddressMapper {
             Addresses addresses
     ){
         return AddressesDtoResponse.builder()
+                .id(addresses.getId())
                 .province(addresses.getProvince())
                 .district(addresses.getDistrict())
                 .ward(addresses.getWard())

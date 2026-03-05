@@ -3,9 +3,12 @@ package com.tuandang.ecommerce_api.infrastructure.adapter;
 import com.tuandang.ecommerce_api.api.mapper.CartItemMapper;
 import com.tuandang.ecommerce_api.core.domain.CartItem;
 import com.tuandang.ecommerce_api.core.port.outgoing.CartItemRepositoryPort;
+import com.tuandang.ecommerce_api.infrastructure.persistence.entity.CartItemEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.mapper.ICartItemMapper;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.CartItemRepository;
+import com.tuandang.ecommerce_api.infrastructure.persistence.repository.CartsRepository;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Var;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import java.util.UUID;
 public class CartItemRepositoryAdapter implements CartItemRepositoryPort {
     private final CartItemRepository cartItemRepository;
     private final ICartItemMapper iCartItemMapper;
+    private final CartsRepository cartsRepository;
 
     @Override
     public void save(CartItem cartItem) {

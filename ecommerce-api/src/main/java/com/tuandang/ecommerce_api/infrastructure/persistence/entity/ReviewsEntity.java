@@ -36,10 +36,10 @@ public class ReviewsEntity {
 
     @ManyToOne
     @JoinColumn(
-            name = "productId"
+            name = "productVariantId"
     )
     @JsonBackReference
-    private ProductsEntity product;
+    private ProductVariantsEntity productVariant;
 
     @OneToMany(
             mappedBy = "review",

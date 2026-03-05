@@ -20,7 +20,7 @@ public class Products {
     private String thumbnailUrl;
     private Float basePrice;
     private String description;
-    private Users merchant;
+    private Shops shops;
     private List<ProductImages> images;
     private List<ProductVariants> variants;
     private List<Category> categories;

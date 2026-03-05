@@ -1,10 +1,12 @@
 package com.tuandang.ecommerce_api.core.service;
 
+import com.tuandang.ecommerce_api.api.dto.response.VoucherDtoResponse;
 import com.tuandang.ecommerce_api.core.domain.Vouchers;
 import com.tuandang.ecommerce_api.core.port.outgoing.VoucherRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,5 +32,9 @@ public class VoucherService {
 
     public void deleteVoucherById(UUID id) {
         voucherRepositoryPort.deleteById(id);
+    }
+
+    public List<Vouchers> getAllVoucherByShopId(UUID shopId) {
+        return voucherRepositoryPort.getAllVoucherByShopId(shopId);
     }
 }

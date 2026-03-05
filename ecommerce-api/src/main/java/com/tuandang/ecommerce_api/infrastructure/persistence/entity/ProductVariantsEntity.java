@@ -1,6 +1,7 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.yaml.snakeyaml.DumperOptions;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,13 +33,24 @@ public class ProductVariantsEntity {
     @Column(columnDefinition = "jsonb")
     private Map<String, String> options;
 
-    @ManyToOne(
-            cascade = CascadeType.MERGE
-    )
+    @ManyToOne()
     @JoinColumn(
             name = "productId"
     )
     @JsonBackReference
     private ProductsEntity product;
 
+    @OneToMany(
+            mappedBy = "productVariant",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonManagedReference
+    private List<ReviewsEntity> reviews;
+
+    @OneToMany(
+            mappedBy = "productVariants"
+    )
+    @JsonManagedReference
+    private List<OrderItemEntity> orderItems;
 }

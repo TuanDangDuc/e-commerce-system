@@ -3,16 +3,19 @@ package com.tuandang.ecommerce_api.api.dto.request.voucher;
 import com.tuandang.ecommerce_api.core.Enum.Scope;
 import com.tuandang.ecommerce_api.core.Enum.VoucherType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record VoucherDtoRequest(
-        UUID id,
+        @NotEmpty
+        String name,
         @NotBlank
         String code,
-        @NotBlank
+        @NotNull
         VoucherType type,
         @NotNull
         Float value,
@@ -27,9 +30,7 @@ public record VoucherDtoRequest(
         Integer usageLimit,
         Integer usedCount,
         Boolean isActive,
-        @NotBlank
-        Scope scope,
         @NotNull
-        UUID userId
+        UUID shopId
 ) {
 }

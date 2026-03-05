@@ -64,13 +64,6 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         return usersRepository.findPasswordByUserName(userName).filter(pass -> pass.equals(password)).map(pass -> usersRepository.findRoleByUserName(userName)).orElse(null);
     }
 
-    @Override
-    public List<Addresses> getAddressesByUserId(UUID id){
-        return usersRepository.findAddressById(id)
-                .stream()
-                .map(iUserMapper::toAddresses)
-                .toList();
-    }
 
     @Override
     public Users findUserById(
@@ -85,24 +78,18 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public List<Products> findAllProductById(UUID userId) {
-        return usersRepository.findProductByUserId(userId)
-                .stream()
-                .map(iProductMapper::toProduct)
-                .toList();
-    }
-
-    @Override
     public Carts findCartByUserId(UUID userId) {
         return iCartMapper.toCart(usersRepository.findCartByUserId(userId));
     }
 
+
     @Override
-    public List<Vouchers> getVoucherByUserId(UUID userId) {
-        return usersRepository.getVoucherByUserId(userId)
-                .stream()
-                .map(iVoucherMapper::toVoucher)
-                .toList();
+    public void changeRole(UUID userId) {
+        usersRepository.changeRole(userId);
     }
 
+    @Override
+    public String findStatusOfAccountByUsername(String username) {
+        return usersRepository.findStatusOfAccountByUsername(username);
+    }
 }

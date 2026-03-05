@@ -5,61 +5,32 @@ import com.tuandang.ecommerce_api.core.domain.ProductImages;
 import com.tuandang.ecommerce_api.core.domain.ProductVariants;
 import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.*;
+import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ShopsRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Component
+@RequiredArgsConstructor
 public class IProductMapper {
-    public ProductImagesEntity toProductImagesEntity(
-            ProductImages productImages
-    ){
-        if  (productImages == null)
-            throw new NullPointerException("productImages should not be null!");
-        return ProductImagesEntity.builder()
-                .url(productImages.getUrl())
-                .imageOrder(productImages.getImageOrder())
-                .build();
-    }
+    private final ShopsRepository shopsRepository;
+    private final ICategoryMapper categoryMapper;
 
-    public ProductVariantsEntity toProductVariantsEntity(
-            ProductVariants variants
-    ) {
-        if (variants == null)
-            throw new NullPointerException("variants should not be null!");
-        return ProductVariantsEntity.builder()
-                .price(variants.getPrice())
-                .stock(variants.getStock())
-                .options(variants.getOptions())
-                .build();
-    }
-    public CategoryEntity toCategoryEntity(
-            Category category
-    ) {
-        if (category == null)
-            throw new NullPointerException("category should not be null!");
-        return CategoryEntity.builder()
-                .id(category.getId())
-                .name(category.getName())
-                .build();
-    }
     public ProductsEntity toProductEntity(
             Products product
     ) {
         if (product == null)
             throw new NullPointerException("product should not be null!");
-        var mer = UsersEntity.builder()
-                .id(product.getMerchant().getId())
-                .build();
         return ProductsEntity.builder()
                 .name(product.getName())
                 .type(product.getType())
                 .thumbnailUrl(product.getThumbnailUrl())
                 .basePrice(product.getBasePrice())
                 .description(product.getDescription())
-                .merchant(mer)
+                .shop(shopsRepository.getReferenceById(product.getShops().getId()))
                 .categories(product.getCategories()
                         .stream()
-                        .map(this::toCategoryEntity)
+                        .map(categoryMapper::toCategoryEntity)
                         .toList())
                 .build();
     }

@@ -3,10 +3,15 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.mapper;
 import com.tuandang.ecommerce_api.core.domain.ProductVariants;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductVariantsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
+import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class IProductVariantMapper {
+    private final ProductRepository productRepository;
+
     public ProductVariantsEntity toEntity(
             ProductVariants productVariants
     ) {
@@ -17,9 +22,7 @@ public class IProductVariantMapper {
                 .price(productVariants.getPrice())
                 .stock(productVariants.getStock())
                 .options(productVariants.getOptions())
-                .product(ProductsEntity.builder()
-                        .id(productVariants.getProduct().getId())
-                        .build())
+                .product(productRepository.getReferenceById(productVariants.getProduct().getId()))
                 .build();
     }
 

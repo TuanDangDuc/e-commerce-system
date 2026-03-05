@@ -14,14 +14,14 @@ public interface UserRepositoryPort {
     public Users findUserByUserName(String userName);
     public void updateUser(Users user);
     public String login(String userName, String password);
-    public List<Addresses> getAddressesByUserId(UUID id);
     public Users findUserById(UUID id);
     public Users findUserByEmail(String email);
 
-    public List<Products> findAllProductById(UUID userId);
 
     public Carts findCartByUserId(UUID userId);
 
-    public List<Vouchers> getVoucherByUserId(UUID userId);
 
+    public void changeRole(UUID userId);
+
+    public String findStatusOfAccountByUsername(String username);
 }

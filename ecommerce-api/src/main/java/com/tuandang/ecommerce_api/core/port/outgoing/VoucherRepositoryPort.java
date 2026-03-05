@@ -1,7 +1,9 @@
 package com.tuandang.ecommerce_api.core.port.outgoing;
 
+import com.nimbusds.openid.connect.sdk.assurance.evidences.Voucher;
 import com.tuandang.ecommerce_api.core.domain.Vouchers;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface VoucherRepositoryPort {
@@ -14,4 +16,6 @@ public interface VoucherRepositoryPort {
     public void setTypeVoucher(Vouchers voucher);
 
     public void deleteById(UUID id);
+
+    public List<Vouchers> getAllVoucherByShopId(UUID shopId);
 }

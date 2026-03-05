@@ -1,5 +1,6 @@
 package com.tuandang.ecommerce_api.core.domain;
 
+import com.tuandang.ecommerce_api.core.Enum.AccountStatus;
 import com.tuandang.ecommerce_api.core.Enum.Role;
 import com.tuandang.ecommerce_api.core.Enum.Sex;
 import jakarta.persistence.Column;
@@ -25,11 +26,10 @@ public class Users extends Accounts{
             columnDefinition = "TEXT"
     )
     private String avatarUrl;
-
+    private AccountStatus accountStatus;
     private List<Addresses> addresses;
     private List<Shops> shops;
     private List<ShopStaff> shopStaffs;
-    private List<Products> products;
     private List<Orders> orders;
     private List<Vouchers> vouchers;
 }

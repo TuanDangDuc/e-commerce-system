@@ -2,6 +2,7 @@ package com.tuandang.ecommerce_api.api.controller;
 
 import com.tuandang.ecommerce_api.api.dto.request.addresses.AddressDtoRequest;
 import com.tuandang.ecommerce_api.api.dto.request.addresses.UpdateAddressDtoRequest;
+import com.tuandang.ecommerce_api.api.dto.response.AddressesDtoResponse;
 import com.tuandang.ecommerce_api.api.mapper.AddressMapper;
 import com.tuandang.ecommerce_api.core.domain.Addresses;
 import com.tuandang.ecommerce_api.core.service.AddressService;
@@ -11,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -40,10 +42,20 @@ public class AddressController {
     // modify address // dang bug
     @PutMapping
     public ResponseEntity<?> updateAddress(
-         @RequestBody UpdateAddressDtoRequest request
+         @Valid @RequestBody UpdateAddressDtoRequest request
     ) {
         addressService.update(addressMapper.toAddressWithoutUserId(request));
         return ResponseEntity.ok().build();
     }
-    // get address co ben userController roi
+
+
+    @GetMapping("/{userId}")
+    public List<AddressesDtoResponse> get(
+            @PathVariable UUID userId
+    ) {
+        return addressService.findAllAddressByUserId(userId)
+                .stream()
+                .map(addressMapper::toAddressDtoResponse)
+                .toList();
+    }
 }

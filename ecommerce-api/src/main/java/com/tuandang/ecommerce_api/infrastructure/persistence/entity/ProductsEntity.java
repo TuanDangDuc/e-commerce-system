@@ -36,12 +36,14 @@ public class ProductsEntity {
             columnDefinition = "TEXT"
     )
     private String description;
+    private Float ratingAverage;
+
     @ManyToOne()
     @JoinColumn(
-            name = "merchantId"
+            name = "shopId"
     )
     @JsonBackReference
-    private UsersEntity merchant;
+    private ShopsEntity shop;
 
     @OneToMany(
             mappedBy = "product",
@@ -60,23 +62,22 @@ public class ProductsEntity {
     @JsonManagedReference
     private List<ProductVariantsEntity> variants;
 
-    @ManyToMany()
+    @ManyToMany(
+            cascade = CascadeType.MERGE
+    )
     @JoinTable(
             name = "CategoryProduct",
             joinColumns = {
-                @JoinColumn(name = "categoryId")
+                @JoinColumn(name = "productId",
+                referencedColumnName = "id")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "productId")
+                    @JoinColumn(name = "categoryId",
+                    referencedColumnName = "id")
             }
     )
     private List<CategoryEntity> categories;
 
-    @OneToMany(
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JsonManagedReference
-    private List<ReviewsEntity> reviews;
+
+
 }

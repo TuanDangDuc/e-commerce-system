@@ -26,4 +26,9 @@ public interface CartsRepository extends JpaRepository<CartsEntity, UUID> {
 
     @Query("select a.cartItems from CartsEntity a where a.cartOwner.id = :userId")
     List<CartItemEntity> getAllCartItemByUserId(UUID userId);
+
+    @Modifying
+    @Transactional
+    @Query("update CartsEntity a set a.totalCost = a.totalCost + :price * :quantity  where a.id = :cartId")
+    void addTotalCost(UUID cartId, Float price, Integer quantity);
 }

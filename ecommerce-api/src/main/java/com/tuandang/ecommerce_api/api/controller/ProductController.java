@@ -6,6 +6,7 @@ import com.tuandang.ecommerce_api.api.dto.request.products.UpdateProductDtoReque
 import com.tuandang.ecommerce_api.api.mapper.ProductMapper;
 import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.core.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,9 @@ public class ProductController {
     // create new product
     @PostMapping
     public ResponseEntity<?> createProduct(
-            @RequestBody AddProductDtoRequest request
+            @Valid @RequestBody AddProductDtoRequest request
     ) {
-        productService.createProduct(productMapper.AddProductDtoToProduct(request));
+        productService.createProduct(productMapper.toAddProductDtoToProduct(request));
         return ResponseEntity.ok().build();
     }
 
@@ -41,16 +42,16 @@ public class ProductController {
     // modify product
     @PutMapping
     public ResponseEntity<?> updateProduct(
-        @RequestBody UpdateProductDtoRequest request
+        @Valid @RequestBody UpdateProductDtoRequest request
     ) {
         productService.updateProduct(productMapper.UpdateProductDtoToProduct(request));
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{shopId}")
     public List<Products> getProduct(
-            @PathVariable UUID userId
+            @PathVariable UUID shopId
     ) {
-        return productService.findAllProductById(userId);
+        return productService.findAllProductByShopId(shopId);
     }
 }

@@ -50,4 +50,12 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
                 .map(productVariantMapper::toProductVariants)
                 .toList();
     }
+
+    @Override
+    public List<Products> findAllProductByShopId(UUID shopId) {
+        return productRepository.findAllProductByShopId(shopId)
+                .stream()
+                .map(productMapper::toProduct)
+                .toList();
+    }
 }

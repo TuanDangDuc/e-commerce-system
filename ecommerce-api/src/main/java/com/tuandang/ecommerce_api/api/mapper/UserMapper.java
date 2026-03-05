@@ -14,7 +14,6 @@ public class UserMapper {
             RegisterUserDtoRequest registerUserDtoRequest
     ){
         return Users.builder()
-                .role(registerUserDtoRequest.role())
                 .userName(registerUserDtoRequest.userName())
                 .password(registerUserDtoRequest.password())
                 .email(registerUserDtoRequest.email())

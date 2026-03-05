@@ -6,6 +6,7 @@ import com.tuandang.ecommerce_api.core.domain.ProductVariants;
 import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.core.service.ProductService;
 import com.tuandang.ecommerce_api.core.service.ProductVariantService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +26,7 @@ public class ProductVariantsController {
     @PostMapping
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> addProductVariant(
-            @RequestBody ProductVariantDtoRequest request
+            @Valid @RequestBody ProductVariantDtoRequest request
     ) {
         productVariantService.create(productVariantMapper.toProductVariants(request));
         return ResponseEntity.ok().build();
@@ -43,7 +44,7 @@ public class ProductVariantsController {
     @PutMapping
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> updateProductVariant(
-            @RequestBody ProductVariantDtoRequest request
+            @Valid @RequestBody ProductVariantDtoRequest request
     ) {
         productVariantService.update(productVariantMapper.toProductVariants(request));
         return ResponseEntity.ok().build();

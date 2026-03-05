@@ -17,4 +17,11 @@ public interface ProductVariantsRepository extends JpaRepository<ProductVariants
             "a.stock = :#{#entity.stock}," +
             "a.options = :#{#entity.options} where a.id = :#{#entity.id}")
     void saveCustom(ProductVariantsEntity entity);
+
+    @Modifying
+    @Transactional
+    @Query("update ProductVariantsEntity a " +
+            "set a.stock = a.stock - :quantity " +
+            "where a.id = :id and a.stock >= :quantity")
+    void updateStock(UUID id, Integer quantity);
 }

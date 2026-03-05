@@ -10,7 +10,7 @@ public record CartItemDtoRequest(
         @NotNull
         Integer quantity,
         @NotNull
-        float price,
+        Float price,
         @NotNull
         UUID cartId,
         @NotNull

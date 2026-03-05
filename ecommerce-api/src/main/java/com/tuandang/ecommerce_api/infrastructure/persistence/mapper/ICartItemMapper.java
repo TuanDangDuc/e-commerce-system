@@ -5,6 +5,8 @@ import com.tuandang.ecommerce_api.core.domain.ProductVariants;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.CartItemEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.CartsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductVariantsEntity;
+import com.tuandang.ecommerce_api.infrastructure.persistence.repository.CartsRepository;
+import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ProductVariantsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ICartItemMapper {
     private final IProductVariantMapper productVariantMapper;
+    private final CartsRepository cartsRepository;
+    private final ProductVariantsRepository productVariantsRepository;
 
     public CartItemEntity toCartItemEntity(CartItem cartItem) {
         if (cartItem == null)
@@ -21,12 +25,8 @@ public class ICartItemMapper {
                 .id(cartItem.getId())
                 .quantity(cartItem.getQuantity())
                 .price(cartItem.getPrice())
-                .cart(CartsEntity.builder()
-                        .id(cartItem.getCart().getId())
-                        .build())
-                .productVariants(ProductVariantsEntity.builder()
-                        .id(cartItem.getProductVariant().getId())
-                        .build())
+                .cart(cartsRepository.getReferenceById(cartItem.getCart().getId()))
+                .productVariants(productVariantsRepository.getReferenceById(cartItem.getProductVariant().getId()))
                 .build();
     }
 

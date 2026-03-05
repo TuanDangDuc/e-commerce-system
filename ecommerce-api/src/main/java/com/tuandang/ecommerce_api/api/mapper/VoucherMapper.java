@@ -5,6 +5,7 @@ import com.tuandang.ecommerce_api.api.dto.request.voucher.UpdateScopeVoucherDtoR
 import com.tuandang.ecommerce_api.api.dto.request.voucher.UpdateTypeVoucherDtoRequest;
 import com.tuandang.ecommerce_api.api.dto.request.voucher.VoucherDtoRequest;
 import com.tuandang.ecommerce_api.api.dto.response.VoucherDtoResponse;
+import com.tuandang.ecommerce_api.core.domain.Shops;
 import com.tuandang.ecommerce_api.core.domain.Users;
 import com.tuandang.ecommerce_api.core.domain.Vouchers;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ public class VoucherMapper {
             VoucherDtoRequest request
     ) {
         return Vouchers.builder()
-                .id(request.id())
+                .name(request.name())
                 .code(request.code())
                 .type(request.type())
                 .value(request.value())
@@ -28,9 +29,8 @@ public class VoucherMapper {
                 .usageLimit(request.usageLimit())
                 .usedCount(request.usedCount())
                 .isActive(request.isActive())
-                .scope(request.scope())
-                .user(Users.builder()
-                        .id(request.userId())
+                .shop(Shops.builder()
+                        .id(request.shopId())
                         .build())
                 .build();
     }
@@ -65,6 +65,7 @@ public class VoucherMapper {
     public VoucherDtoResponse toVoucherDtoResponse(Vouchers voucher) {
         return VoucherDtoResponse.builder()
                 .id(voucher.getId())
+                .name(voucher.getName())
                 .code(voucher.getCode())
                 .type(voucher.getType())
                 .value(voucher.getValue())

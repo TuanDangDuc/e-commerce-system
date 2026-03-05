@@ -1,17 +1,24 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.mapper;
 
 import com.nimbusds.openid.connect.sdk.assurance.evidences.Voucher;
+import com.tuandang.ecommerce_api.core.Enum.Scope;
 import com.tuandang.ecommerce_api.core.domain.Vouchers;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.VouchersEntity;
+import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ShopsRepository;
+import com.tuandang.ecommerce_api.infrastructure.persistence.repository.UsersRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class IVoucherMapper {
+    private final UsersRepository usersRepository;
+    private final ShopsRepository shopsRepository;
 
     public VouchersEntity toVoucherEntity(Vouchers vouchers) {
         return VouchersEntity.builder()
-                .id(vouchers.getId())
+                .name(vouchers.getName())
                 .code(vouchers.getCode())
                 .type(vouchers.getType())
                 .value(vouchers.getValue())
@@ -22,10 +29,8 @@ public class IVoucherMapper {
                 .usageLimit(vouchers.getUsageLimit())
                 .usedCount(vouchers.getUsedCount())
                 .isActive(vouchers.getIsActive())
-                .scope(vouchers.getScope())
-                .seller(UsersEntity.builder()
-                        .id(vouchers.getUser().getId())
-                        .build())
+                .scope(Scope.SHOP_VOUCHER)
+                .shops(shopsRepository.getReferenceById(vouchers.getShop().getId()))
                 .build();
     }
 
@@ -61,6 +66,7 @@ public class IVoucherMapper {
             return null;
         return Vouchers.builder()
                 .id(entity.getId())
+                .name(entity.getName())
                 .code(entity.getCode())
                 .type(entity.getType())
                 .value(entity.getValue())

@@ -44,4 +44,12 @@ public class AddressRepositoryAdapter implements AddressRepositoryPort {
                 addressRepository.findAddressEntitiesById(id)
         );
     }
+
+    @Override
+    public List<Addresses> findAllAddressByUserId(UUID userId) {
+        return addressRepository.findAllAddressEntityByUserId(userId)
+                .stream()
+                .map(addressMapper::toAddresses)
+                .toList();
+    }
 }

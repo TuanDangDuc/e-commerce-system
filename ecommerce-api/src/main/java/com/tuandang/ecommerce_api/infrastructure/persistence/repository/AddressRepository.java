@@ -1,11 +1,13 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.repository;
 
+import com.tuandang.ecommerce_api.core.domain.Addresses;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.AddressEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -25,4 +27,7 @@ public interface AddressRepository extends JpaRepository<AddressEntity, UUID> {
             "a.type = :#{#addressEntity.type}, " +
             "a.phoneNumber = :#{#addressEntity.phoneNumber}")
     public void update(AddressEntity addressEntity);
+
+    @Query("select a from AddressEntity a where a.user.id = :userId")
+    List<AddressEntity> findAllAddressEntityByUserId(UUID userId);
 }

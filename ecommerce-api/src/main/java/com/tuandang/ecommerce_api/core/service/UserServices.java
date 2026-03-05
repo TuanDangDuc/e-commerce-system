@@ -11,6 +11,7 @@ import com.tuandang.ecommerce_api.infrastructure.persistence.repository.UsersRep
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -71,7 +72,8 @@ public class UserServices {
     }
 
     public String login(String username, String password){
-
+        if (userRepositoryPort.findStatusOfAccountByUsername(username) == "BANNED")
+            throw new DisabledException("Account is BANNED");
         try {
             Authentication auth = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -89,13 +91,8 @@ public class UserServices {
         return "Fail";
     }
 
-    public List<Addresses> getAddressesByUserId(UUID id){
-        return  userRepositoryPort.getAddressesByUserId(id);
+
+    public void changeRole(UUID userId) {
+        userRepositoryPort.changeRole(userId);
     }
-
-
-    public List<Vouchers> getVoucherByUserId(UUID userId) {
-        return userRepositoryPort.getVoucherByUserId(userId);
-    }
-
 }

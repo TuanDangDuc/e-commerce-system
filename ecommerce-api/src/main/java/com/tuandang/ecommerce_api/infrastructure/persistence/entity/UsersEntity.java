@@ -3,6 +3,7 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nimbusds.openid.connect.sdk.assurance.evidences.Voucher;
+import com.tuandang.ecommerce_api.core.Enum.AccountStatus;
 import com.tuandang.ecommerce_api.core.Enum.Role;
 import com.tuandang.ecommerce_api.core.Enum.Sex;
 import jakarta.persistence.*;
@@ -27,6 +28,9 @@ import java.util.Set;
 @Entity
 public class UsersEntity extends AccountsEntity {
 
+    @Column(
+            nullable = false
+    )
     private Role role;
     private String fullName;
 
@@ -34,7 +38,8 @@ public class UsersEntity extends AccountsEntity {
     private Sex sex;
 
     private LocalDateTime dateOfBirth;
-
+    @Enumerated(EnumType.STRING)
+    private AccountStatus  accountStatus;
     @Column(
             columnDefinition = "TEXT"
     )
@@ -63,19 +68,12 @@ public class UsersEntity extends AccountsEntity {
     @JsonManagedReference
     private Set<ShopStaffEntity> shopStaffs;
 
-    @OneToMany(
-            mappedBy = "merchant",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JsonManagedReference
-    private Set<ProductsEntity> products;
+
 
     @OneToMany(
             mappedBy = "user"
     )
     @JsonManagedReference
-    //@Fetch(FetchMode.SUBSELECT)
     private Set<OrdersEntity> orders;
 
     @OneToOne(
@@ -85,10 +83,4 @@ public class UsersEntity extends AccountsEntity {
     )
     private CartsEntity carts;
 
-    @OneToMany(
-            mappedBy = "seller",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<VouchersEntity> vouchers;
 }

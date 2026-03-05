@@ -22,5 +22,6 @@ public class Shops {
     private Float ratingAverage;
     private Date createTime;
     private Users owner;
+    private List<Products> products;
     private List<ShopStaff> shopStaffs;
 }

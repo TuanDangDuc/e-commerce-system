@@ -1,6 +1,7 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.repository;
 
 import com.tuandang.ecommerce_api.core.domain.ProductVariants;
+import com.tuandang.ecommerce_api.core.domain.Products;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductVariantsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ProductsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,7 @@ public interface ProductRepository extends JpaRepository<ProductsEntity, UUID> {
 
     @Query("select a.variants from ProductsEntity a where a.id = :productId")
     public List<ProductVariantsEntity> findProductVariantByProductId(UUID productId);
+
+    @Query("select a from ProductsEntity  a where a.shop.id = :shopId")
+    List<ProductsEntity> findAllProductByShopId(UUID shopId);
 }

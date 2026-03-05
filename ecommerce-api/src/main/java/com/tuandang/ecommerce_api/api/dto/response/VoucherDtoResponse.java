@@ -11,6 +11,7 @@ import java.util.UUID;
 @Builder
 public record VoucherDtoResponse(
         UUID id,
+        String name,
         String code,
         VoucherType type,
         Float value,

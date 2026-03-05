@@ -37,4 +37,9 @@ public class ProductVariantRepositoryAdapter implements ProductVariantRepository
             throw new NullPointerException("productVariants should not be null");
         productVariantsRepository.saveCustom(productVariantMapper.toEntity(productVariants));
     }
+
+    @Override
+    public void updateStock(UUID id, Integer quantity) {
+        productVariantsRepository.updateStock(id, quantity);
+    }
 }

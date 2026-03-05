@@ -4,6 +4,7 @@ import com.tuandang.ecommerce_api.api.dto.request.products.AddProductDtoRequest;
 import com.tuandang.ecommerce_api.api.dto.request.products.UpdateProductDtoRequest;
 import com.tuandang.ecommerce_api.core.domain.Category;
 import com.tuandang.ecommerce_api.core.domain.Products;
+import com.tuandang.ecommerce_api.core.domain.Shops;
 import com.tuandang.ecommerce_api.core.domain.Users;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Service
 public class ProductMapper {
-    public Products AddProductDtoToProduct(
+    public Products toAddProductDtoToProduct(
         AddProductDtoRequest request
     ) {
         List<Category> categories = new ArrayList<>();
@@ -27,8 +28,8 @@ public class ProductMapper {
                 .thumbnailUrl(request.thumbnailUrl())
                 .basePrice(request.basePrice())
                 .description(request.description())
-                .merchant(Users.builder()
-                        .id(request.userId())
+                .shops(Shops.builder()
+                        .id(request.shopId())
                         .build())
                 .categories(categories)
                 .build();

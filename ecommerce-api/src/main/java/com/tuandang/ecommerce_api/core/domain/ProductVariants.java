@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 public class ProductVariants {
     private UUID id;
-    private float price;
+    private Float price;
     private Integer stock;
     private Map<String, String> options;
     private Products product;

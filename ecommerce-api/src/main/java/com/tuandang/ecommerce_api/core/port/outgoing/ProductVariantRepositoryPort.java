@@ -10,4 +10,6 @@ public interface ProductVariantRepositoryPort {
     public void deleteById(UUID id);
 
     public void saveCustom(ProductVariants productVariants);
+
+    public void updateStock(UUID id, Integer quantity);
 }

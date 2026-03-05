@@ -13,4 +13,5 @@ public class CartItem {
     private float price;
     private Carts cart;
     private ProductVariants productVariant;
+
 }

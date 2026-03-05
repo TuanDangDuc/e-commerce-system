@@ -9,21 +9,20 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class IShopMapper {
+    private final UsersRepository userRepository;
+
     private final UsersRepository usersRepository;
     public ShopsEntity toShopsEntity(Shops shop) {
         if (shop == null)
             throw new NullPointerException("shop should not be null");
-        var user = usersRepository.findUsersEntitiesById(shop.getOwner().getId());
-        System.out.println(" id = "  + shop.getOwner().getId());
         return ShopsEntity.builder()
                 .id(shop.getId())
                 .name(shop.getName())
                 .description(shop.getDescription())
-                .ratingAverage(shop.getRatingAverage())
                 .status(shop.getStatus())
                 .avatarUrl(shop.getAvatarUrl())
                 .createTime(shop.getCreateTime())
-                .owner(user)
+                .owner(userRepository.getReferenceById(shop.getOwner().getId()))
                 .build();
     }
 

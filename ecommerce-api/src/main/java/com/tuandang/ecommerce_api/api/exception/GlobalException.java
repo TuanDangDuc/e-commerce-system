@@ -2,6 +2,7 @@ package com.tuandang.ecommerce_api.api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,13 @@ public class GlobalException {
             errors.put(fieldName,message);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ResponseEntity<?> HandleHttpMessageNotReadableException(
+            HttpMessageNotReadableException exp
+    ) {
+        return new ResponseEntity<>(exp.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = AppException.class)

@@ -1,19 +1,19 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"cart"})
 public class CartItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,8 +28,6 @@ public class CartItemEntity {
     @JsonBackReference
     private CartsEntity cart;
 
-    @OneToOne(
-            cascade = CascadeType.MERGE
-    )
+    @OneToOne(cascade = CascadeType.MERGE)
     private ProductVariantsEntity productVariants;
 }

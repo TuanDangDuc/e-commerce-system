@@ -2,6 +2,7 @@ package com.tuandang.ecommerce_api.core.port.outgoing;
 
 import com.tuandang.ecommerce_api.core.domain.Addresses;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface AddressRepositoryPort {
@@ -9,4 +10,6 @@ public interface AddressRepositoryPort {
     public void delete(UUID id);
     public void update(Addresses address);
     public Addresses findById(UUID id);
+
+    public List<Addresses> findAllAddressByUserId(UUID userId);
 }

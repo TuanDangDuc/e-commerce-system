@@ -14,10 +14,10 @@ import java.util.UUID;
 
 public record AddProductDtoRequest(
         @NotNull
-        UUID userId,
+        UUID shopId,
         @NotBlank
         String name,
-        @NotBlank
+        @NotNull
         Type type,
         @NotBlank
         String thumbnailUrl,

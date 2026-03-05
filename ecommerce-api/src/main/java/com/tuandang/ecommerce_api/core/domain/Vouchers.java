@@ -2,6 +2,8 @@ package com.tuandang.ecommerce_api.core.domain;
 
 import com.tuandang.ecommerce_api.core.Enum.Scope;
 import com.tuandang.ecommerce_api.core.Enum.VoucherType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,6 +14,7 @@ import java.util.UUID;
 @Data
 public class Vouchers {
     private UUID id;
+    private String name;
     private String code;
     private VoucherType type;
     private Float value;
@@ -23,5 +26,6 @@ public class Vouchers {
     private Integer usedCount;
     private Boolean isActive;
     private Scope scope;
-    private Users user;
+    private Shops shop;
+    private Orders platformOrder;
 }

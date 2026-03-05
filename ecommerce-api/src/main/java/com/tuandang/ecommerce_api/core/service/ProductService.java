@@ -46,11 +46,12 @@ public class ProductService {
         productRepositoryPort.updateProduct(product);
     }
 
-    public List<Products> findAllProductById(UUID userId) {
-         return userRepositoryPort.findAllProductById(userId);
-    }
 
     public List<ProductVariants> getProductVariantsById(UUID id) {
         return productRepositoryPort.findProductVariantById(id);
+    }
+
+    public List<Products> findAllProductByShopId(UUID shopId) {
+        return productRepositoryPort.findAllProductByShopId(shopId);
     }
 }

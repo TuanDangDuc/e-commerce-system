@@ -11,9 +11,11 @@ public interface CartRepositoryPort {
 
     public List<CartItem> findAllCartItemById(UUID cartId);
 
-    public void saveTotalCostOfCartByUserId(UUID userId, Float totalCost);
+
 
     public Carts getCartByUserId(UUID userId);
 
     public List<CartItem> findAllCartItemByUserId(UUID userId);
+
+
 }

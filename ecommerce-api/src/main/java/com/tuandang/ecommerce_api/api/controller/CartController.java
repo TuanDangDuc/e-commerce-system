@@ -44,12 +44,4 @@ public class CartController {
                 .toList();
     }
 
-    // get total cost of cart
-    @GetMapping("/user/{userId}")
-    @PreAuthorize("hasRole('SELLER') or hasRole('BUYER')")
-    public CartDtoResponse getCart(
-            @PathVariable UUID userId
-    ) {
-        return cartMapper.toCartDtoResponse(cartService.getCart(userId));
-    }
 }

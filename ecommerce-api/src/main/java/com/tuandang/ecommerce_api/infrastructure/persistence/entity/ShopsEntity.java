@@ -12,6 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -33,10 +34,10 @@ public class ShopsEntity {
     @CreationTimestamp
     @Column(updatable = false)
     private Date createTime;
-    @ManyToOne(
-            cascade = CascadeType.MERGE
+    @ManyToOne()
+    @JoinColumn(
+            name = "ownerId"
     )
-    @JoinColumn(name = "ownerId")
     @JsonBackReference
     private UsersEntity owner;
 
@@ -44,4 +45,19 @@ public class ShopsEntity {
     @JsonManagedReference
     private List<ShopStaffEntity> shopStaffs;
 
+    @OneToMany(
+            mappedBy = "shop",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonManagedReference
+    private Set<ProductsEntity> products;
+
+    @OneToMany(
+            mappedBy = "shops",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonManagedReference
+    private List<VouchersEntity> vouchers;
 }

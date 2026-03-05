@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface VouchersRepository extends JpaRepository<VouchersEntity, UUID> {
@@ -25,4 +26,7 @@ public interface VouchersRepository extends JpaRepository<VouchersEntity, UUID> 
     @Transactional
     @Query("update VouchersEntity a set a.type = :#{#onlyTypeVoucherEntity.type} where a.id = :#{#onlyTypeVoucherEntity.id}")
     public void setTypeVoucher(VouchersEntity onlyTypeVoucherEntity);
+
+    @Query("select a from VouchersEntity a where a.shops.id = :shopId")
+    public List<VouchersEntity> getVouchersEntitiesByShopsId(UUID shopId);
 }

@@ -1,5 +1,7 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.mapper;
 
+import com.tuandang.ecommerce_api.core.Enum.AccountStatus;
+import com.tuandang.ecommerce_api.core.Enum.Role;
 import com.tuandang.ecommerce_api.core.domain.*;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.AddressEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
@@ -12,10 +14,11 @@ public class IUserMapper {
         if (user == null)
             throw new NullPointerException("user should not be null");
         return UsersEntity.builder()
-                .role(user.getRole())
                 .userName(user.getUserName())
+                .role(Role.BUYER)
                 .password(user.getPassword())
                 .email(user.getEmail())
+                .accountStatus(AccountStatus.PENDING)
                 .build();
     }
 

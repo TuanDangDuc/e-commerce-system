@@ -56,8 +56,6 @@ public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
     @Query("select a.password from UsersEntity a where a.userName = :userName")
     public Optional<String> findPasswordByUserName(String userName);
 
-    @Query("select a.addresses from UsersEntity a where a.id = :id")
-    public List<AddressEntity> findAddressById(UUID id);
 
     public UsersEntity findUsersEntitiesById(UUID id);
 
@@ -66,12 +64,15 @@ public interface UsersRepository extends JpaRepository<UsersEntity, UUID> {
 
     public UsersEntity findUsersEntitiesByEmail(String email);
 
-    @Query("select a.products from UsersEntity a where a.id = :userId")
-    public List<ProductsEntity> findProductByUserId(UUID userId);
-
     @Query("select a.carts from UsersEntity a where a.id = :userId")
     public CartsEntity findCartByUserId(UUID userId);
 
-    @Query("select a.vouchers from UsersEntity a where a.id = :userId")
-    public List<VouchersEntity> getVoucherByUserId(UUID userId);
+
+    @Modifying
+    @Transactional
+    @Query("update UsersEntity a set a.role = 0 where a.id = :userId")
+    public void changeRole(UUID userId);
+
+    @Query("select a.accountStatus from UsersEntity a where a.userName = :username")
+    public String findStatusOfAccountByUsername(String username);
 }

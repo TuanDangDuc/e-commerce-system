@@ -7,6 +7,7 @@ import com.tuandang.ecommerce_api.infrastructure.persistence.repository.Vouchers
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -38,5 +39,13 @@ public class VoucherRepositoryAdapter implements VoucherRepositoryPort {
     @Override
     public void deleteById(UUID id) {
         vouchersRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Vouchers> getAllVoucherByShopId(UUID shopId) {
+        return vouchersRepository.getVouchersEntitiesByShopsId(shopId)
+                .stream()
+                .map(voucherMapper::toVoucher)
+                .toList();
     }
 }

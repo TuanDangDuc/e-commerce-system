@@ -1,12 +1,16 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tuandang.ecommerce_api.core.Enum.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,20 +25,29 @@ public class OrdersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private UUID orderCode;
+    private String orderCode;
     private String recipientName;
     private String recipientPhone;
-    @OneToOne
+    @ManyToOne(
+            cascade = CascadeType.MERGE
+    )
+    @JoinColumn(
+            name = "shippingAddressId"
+    )
+    @JsonBackReference
     private AddressEntity shippingAddress;
     @Column(columnDefinition = "TEXT")
     private String note;
-    private float subtotal;
-    private float shippingFee;
-    private float discountAmount;
-    private float totalAmount;
+    private Float subtotal;
+    private Float shippingFee;
+    private Float discountAmount;
+    private Float totalAmount;
+    @CreationTimestamp
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime canceledAt;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @ManyToOne
     @JoinColumn(
@@ -50,10 +63,18 @@ public class OrdersEntity {
     @JsonManagedReference
     private List<OrderItemEntity> orderItems;
 
-    @OneToOne
+    @ManyToOne()
+    @JoinColumn(
+            name = "platformVoucherId"
+    )
+    @JsonBackReference
     private VouchersEntity platformVoucher;
 
-    @OneToOne
+    @ManyToOne()
+    @JoinColumn(
+            name = "shippingVoucherId"
+    )
+    @JsonBackReference
     private VouchersEntity shippingVoucher;
 
 }

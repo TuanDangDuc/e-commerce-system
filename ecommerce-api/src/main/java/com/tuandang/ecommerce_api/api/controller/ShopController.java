@@ -4,6 +4,7 @@ import com.tuandang.ecommerce_api.api.dto.request.shop.ShopDtoRequest;
 import com.tuandang.ecommerce_api.api.mapper.ShopMapper;
 import com.tuandang.ecommerce_api.core.domain.Shops;
 import com.tuandang.ecommerce_api.core.service.ShopService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ShopController {
     @PostMapping
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> createShop(
-            @RequestBody ShopDtoRequest request
+            @Valid @RequestBody ShopDtoRequest request
     ) {
         shopService.create(shopMapper.toShop(request));
         return  ResponseEntity.ok().build();
@@ -39,7 +40,7 @@ public class ShopController {
     @PutMapping()
     @PreAuthorize("hasRole('SELLER')")
     public ResponseEntity<?> updateShop(
-        @RequestBody ShopDtoRequest request
+        @Valid @RequestBody ShopDtoRequest request
     ) {
         shopService.modifyShop(shopMapper.toShop(request));
         return ResponseEntity.ok().build();

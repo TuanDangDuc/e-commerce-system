@@ -7,12 +7,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class CartMapper {
 
-    public CartDtoResponse toCartDtoResponse(
-            Carts cart
-    ) {
-        return CartDtoResponse.builder()
-                .id(cart.getId())
-                .totalCost(cart.getTotalCost())
-                .build();
-    }
+
 }
