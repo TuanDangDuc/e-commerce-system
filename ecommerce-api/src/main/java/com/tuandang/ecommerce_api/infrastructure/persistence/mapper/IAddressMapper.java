@@ -46,7 +46,7 @@ public class IAddressMapper {
                 .city(address.getCity())
                 .county(address.getCounty())
                 .specificAddress(address.getSpecificAddress())
-                .isDefault(address.isDefault())
+                .isDefault(address.getIsDefault())
                 .type(address.getType())
                 .phoneNumber(address.getPhoneNumber())
                 .build();

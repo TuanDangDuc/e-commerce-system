@@ -2,6 +2,7 @@ package com.tuandang.ecommerce_api.core.port.outgoing;
 
 import com.tuandang.ecommerce_api.core.domain.ProductVariants;
 
+
 import java.util.UUID;
 
 public interface ProductVariantRepositoryPort {
@@ -12,4 +13,6 @@ public interface ProductVariantRepositoryPort {
     public void saveCustom(ProductVariants productVariants);
 
     public void updateStock(UUID id, Integer quantity);
+
+    public Float getProductVariantById(UUID id);
 }

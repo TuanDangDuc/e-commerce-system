@@ -3,6 +3,7 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tuandang.ecommerce_api.core.Enum.AccountStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +28,8 @@ public class ShopsEntity {
     private String name;
     @Column( columnDefinition = "TEXT")
     private String description;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private AccountStatus status;
     @Column(columnDefinition = "TEXT")
     private String avatarUrl;
     private Float ratingAverage;

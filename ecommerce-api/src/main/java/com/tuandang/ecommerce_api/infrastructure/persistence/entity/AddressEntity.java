@@ -27,7 +27,7 @@ public class AddressEntity {
     private String city;
     private String county;
     private String specificAddress;
-    private boolean isDefault;
+    private Boolean isDefault;
     private String type;
     private String phoneNumber;
 

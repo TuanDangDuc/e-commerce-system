@@ -18,4 +18,10 @@ public interface VoucherRepositoryPort {
     public void deleteById(UUID id);
 
     public List<Vouchers> getAllVoucherByShopId(UUID shopId);
+
+    public Vouchers checkShopVoucher(UUID shopId, String code);
+
+    public void updateVoucherUsage(UUID id);
+
+    public Vouchers getVoucherById(UUID id);
 }

@@ -1,9 +1,6 @@
 package com.tuandang.ecommerce_api.api.controller;
 
-import com.tuandang.ecommerce_api.api.dto.request.voucher.UpdateActiveVoucherDtoRequest;
-import com.tuandang.ecommerce_api.api.dto.request.voucher.UpdateScopeVoucherDtoRequest;
-import com.tuandang.ecommerce_api.api.dto.request.voucher.UpdateTypeVoucherDtoRequest;
-import com.tuandang.ecommerce_api.api.dto.request.voucher.VoucherDtoRequest;
+import com.tuandang.ecommerce_api.api.dto.request.voucher.*;
 import com.tuandang.ecommerce_api.api.dto.response.VoucherDtoResponse;
 import com.tuandang.ecommerce_api.api.mapper.VoucherMapper;
 import com.tuandang.ecommerce_api.core.service.UserServices;
@@ -14,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.InvalidAttributeValueException;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +23,7 @@ public class VoucherController {
     private final VoucherMapper voucherMapper;
 
     @PostMapping
-    @PreAuthorize("hasRole('SELLER')")
+    @PreAuthorize("hasRole('SELLER') and hasRole('ADMIN')")
     public ResponseEntity<?> createVoucher(
             @Valid @RequestBody VoucherDtoRequest request
     ) {
@@ -79,8 +77,22 @@ public class VoucherController {
         voucherService.deleteVoucherById(id);
         return ResponseEntity.ok().build();
     }
-//
-//    // check voucher
-//    @PostMapping
-//    public String
+
+    @PatchMapping("/usage/{id}")
+    public ResponseEntity<?> updateVoucherUsage(
+            @PathVariable UUID id
+    ) {
+        voucherService.updateVoucherUsage(id);
+        return ResponseEntity.ok().build();
+    }
+
+    // check voucher
+    @PostMapping("/shop")
+    public Float checkShopVoucher(
+        @RequestBody checkShopVoucherDtoRequest request
+    ) {
+        return voucherService.calculate(request.shopId(), request.code(), request.productVariantId(), request.quantity());
+    }
+
+
 }

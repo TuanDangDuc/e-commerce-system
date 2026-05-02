@@ -7,6 +7,7 @@ import com.tuandang.ecommerce_api.infrastructure.persistence.repository.UsersRep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @RequiredArgsConstructor
 public class ICartMapper {
@@ -16,7 +17,7 @@ public class ICartMapper {
     public CartsEntity toCartEntity(Carts cart) {
         return CartsEntity.builder()
                 .id(cart.getId())
-                .totalCost(0.0F)
+                .totalCost(0F)
                 .cartOwner(usersRepository.getReferenceById(cart.getOwner().getId()))
                 .build();
     }

@@ -19,8 +19,7 @@ public class CartItemEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private Integer quantity;
-    private float price;
-
+    private Float price;
     @ManyToOne
     @JoinColumn(
             name = "cartId"

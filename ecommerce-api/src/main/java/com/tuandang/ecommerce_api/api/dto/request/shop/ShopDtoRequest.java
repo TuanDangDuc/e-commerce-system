@@ -11,13 +11,8 @@ public record ShopDtoRequest(
         String name,
         @NotBlank
         String description,
-        @NotNull
-        String status,
         @NotBlank
         String avatarUrl,
-        @NotNull
-        Float ratingAverage,
-
         UUID ownerId
 ) {
 }

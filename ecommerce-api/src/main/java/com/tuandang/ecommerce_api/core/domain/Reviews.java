@@ -11,7 +11,7 @@ import java.util.UUID;
 @Builder
 public class Reviews {
     private UUID id;
-    private float rating;
+    private Float rating;
     @Column(
             columnDefinition = "TEXT"
     )

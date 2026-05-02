@@ -48,4 +48,19 @@ public class VoucherRepositoryAdapter implements VoucherRepositoryPort {
                 .map(voucherMapper::toVoucher)
                 .toList();
     }
+
+    @Override
+    public Vouchers checkShopVoucher(UUID shopId, String code ) {
+        return voucherMapper.toVoucher(vouchersRepository.checkShopVoucher(shopId, code));
+    }
+
+    @Override
+    public void updateVoucherUsage(UUID id) {
+        vouchersRepository.updateVoucherUsage(id);
+    }
+
+    @Override
+    public Vouchers getVoucherById(UUID id) {
+        return voucherMapper.toVoucher(vouchersRepository.getVouchersEntitiesById(id));
+    }
 }

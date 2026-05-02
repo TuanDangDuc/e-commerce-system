@@ -42,4 +42,9 @@ public class ProductVariantRepositoryAdapter implements ProductVariantRepository
     public void updateStock(UUID id, Integer quantity) {
         productVariantsRepository.updateStock(id, quantity);
     }
+
+    @Override
+    public Float getProductVariantById(UUID id) {
+        return productVariantsRepository.getPriceOfProductVariant(id);
+    }
 }

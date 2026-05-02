@@ -30,7 +30,7 @@ public record VoucherDtoRequest(
         Integer usageLimit,
         Integer usedCount,
         Boolean isActive,
-        @NotNull
-        UUID shopId
+        UUID shopId,
+        UUID userId
 ) {
 }

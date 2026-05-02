@@ -1,5 +1,6 @@
 package com.tuandang.ecommerce_api.infrastructure.persistence.mapper;
 
+import com.tuandang.ecommerce_api.core.Enum.AccountStatus;
 import com.tuandang.ecommerce_api.core.domain.Shops;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ShopsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.UsersRepository;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class IShopMapper {
     private final UsersRepository userRepository;
 
-    private final UsersRepository usersRepository;
     public ShopsEntity toShopsEntity(Shops shop) {
         if (shop == null)
             throw new NullPointerException("shop should not be null");
@@ -19,7 +19,8 @@ public class IShopMapper {
                 .id(shop.getId())
                 .name(shop.getName())
                 .description(shop.getDescription())
-                .status(shop.getStatus())
+                .status(AccountStatus.ACTIVE)
+                .ratingAverage(0.0f)
                 .avatarUrl(shop.getAvatarUrl())
                 .createTime(shop.getCreateTime())
                 .owner(userRepository.getReferenceById(shop.getOwner().getId()))

@@ -29,8 +29,11 @@ public class VoucherMapper {
                 .usageLimit(request.usageLimit())
                 .usedCount(request.usedCount())
                 .isActive(request.isActive())
-                .shop(Shops.builder()
+                .shops(Shops.builder()
                         .id(request.shopId())
+                        .build())
+                .users(Users.builder()
+                        .id(request.userId())
                         .build())
                 .build();
     }

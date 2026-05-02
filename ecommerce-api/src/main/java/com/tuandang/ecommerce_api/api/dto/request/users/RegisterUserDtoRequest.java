@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotEmpty;
 
 public record RegisterUserDtoRequest(
 
-        Role role,
         @NotBlank
         String userName,
         @NotBlank

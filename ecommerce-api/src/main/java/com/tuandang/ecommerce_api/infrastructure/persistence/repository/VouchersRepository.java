@@ -29,4 +29,15 @@ public interface VouchersRepository extends JpaRepository<VouchersEntity, UUID> 
 
     @Query("select a from VouchersEntity a where a.shops.id = :shopId")
     public List<VouchersEntity> getVouchersEntitiesByShopsId(UUID shopId);
+
+    @Query("select a from VouchersEntity a where a.shops.id = :shopId and a.code = :code and a.usedCount < a.usageLimit and CURRENT_TIMESTAMP between a.startAt and a.endAt")
+    public VouchersEntity checkShopVoucher(UUID shopId, String code);
+
+    @Modifying
+    @Transactional
+    @Query("update VouchersEntity a set a.usedCount = a.usedCount+1 where a.id = :id")
+    public void updateVoucherUsage(UUID id);
+
+    @Query("select a from VouchersEntity a where a.id = :id")
+    public VouchersEntity getVouchersEntitiesById(UUID id);
 }

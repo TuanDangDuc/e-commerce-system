@@ -17,7 +17,6 @@ public class ShopMapper {
                 .id(request.id())
                 .name(request.name())
                 .description(request.description())
-                .status(request.status())
                 .avatarUrl(request.avatarUrl())
                 .owner(Users.builder()
                         .id(request.ownerId())

@@ -3,6 +3,7 @@ package com.tuandang.ecommerce_api.infrastructure.persistence.mapper;
 import com.nimbusds.openid.connect.sdk.assurance.evidences.Voucher;
 import com.tuandang.ecommerce_api.core.Enum.Scope;
 import com.tuandang.ecommerce_api.core.domain.Vouchers;
+import com.tuandang.ecommerce_api.infrastructure.persistence.entity.ShopsEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.UsersEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.entity.VouchersEntity;
 import com.tuandang.ecommerce_api.infrastructure.persistence.repository.ShopsRepository;
@@ -17,6 +18,17 @@ public class IVoucherMapper {
     private final ShopsRepository shopsRepository;
 
     public VouchersEntity toVoucherEntity(Vouchers vouchers) {
+        ShopsEntity shop = null;
+        Scope scope = Scope.SHOP_VOUCHER;
+        UsersEntity user = null;
+        if (vouchers.getShops() != null && vouchers.getShops().getId() != null) {
+            shop = shopsRepository.getReferenceById(vouchers.getShops().getId());
+        }
+        if  (vouchers.getUsers() != null && vouchers.getUsers().getId() != null) {
+            user = usersRepository.getReferenceById(vouchers.getUsers().getId());
+            scope = Scope.PLATFORM_VOUCHER;
+        }
+
         return VouchersEntity.builder()
                 .name(vouchers.getName())
                 .code(vouchers.getCode())
@@ -29,8 +41,9 @@ public class IVoucherMapper {
                 .usageLimit(vouchers.getUsageLimit())
                 .usedCount(vouchers.getUsedCount())
                 .isActive(vouchers.getIsActive())
-                .scope(Scope.SHOP_VOUCHER)
-                .shops(shopsRepository.getReferenceById(vouchers.getShop().getId()))
+                .shops(shop)
+                .users(user)
+                .scope(scope)
                 .build();
     }
 

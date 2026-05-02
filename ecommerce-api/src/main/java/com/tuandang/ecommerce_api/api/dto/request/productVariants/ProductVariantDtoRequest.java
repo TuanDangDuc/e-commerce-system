@@ -12,7 +12,7 @@ public record ProductVariantDtoRequest(
         @NotNull
         UUID productId,
         @NotNull
-        float price,
+        Float price,
         @NotNull
         Integer stock,
         @NotEmpty

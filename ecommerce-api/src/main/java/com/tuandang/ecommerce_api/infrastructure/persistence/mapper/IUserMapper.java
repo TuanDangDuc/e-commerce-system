@@ -49,7 +49,7 @@ public class IUserMapper {
                 .ward(addressEntity.getWard())
                 .city(addressEntity.getCity())
                 .specificAddress(addressEntity.getSpecificAddress())
-                .isDefault(addressEntity.isDefault())
+                .isDefault(addressEntity.getIsDefault())
                 .type(addressEntity.getType())
                 .phoneNumber(addressEntity.getPhoneNumber())
                 .build();

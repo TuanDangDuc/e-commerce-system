@@ -24,4 +24,7 @@ public interface ProductVariantsRepository extends JpaRepository<ProductVariants
             "set a.stock = a.stock - :quantity " +
             "where a.id = :id and a.stock >= :quantity")
     void updateStock(UUID id, Integer quantity);
+
+    @Query("select a.price from ProductVariantsEntity a where a.id = :id")
+    Float getPriceOfProductVariant(UUID id);
 }

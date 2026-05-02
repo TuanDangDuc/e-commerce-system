@@ -23,7 +23,7 @@ public class ReviewsEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private float rating;
+    private Float rating;
     @Column(
             columnDefinition = "TEXT"
     )

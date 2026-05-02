@@ -25,7 +25,7 @@ public class ProductVariantsEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private float price;
+    private Float price;
     private Integer stock;
 
 

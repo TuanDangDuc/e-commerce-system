@@ -83,4 +83,11 @@ public class UsersEntity extends AccountsEntity {
     )
     private CartsEntity carts;
 
+    @OneToMany(
+            mappedBy = "users",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JsonManagedReference
+    private Set<VouchersEntity> vouchers;
 }

@@ -10,7 +10,7 @@ import java.util.UUID;
 public record CartItemDtoResponse(
         UUID id,
         Integer quantity,
-        float price,
+        Float price,
         ProductVariants  productVariant
 ) {
 }

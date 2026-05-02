@@ -20,13 +20,13 @@ public record OrderDtoRequest(
         @NotBlank
         String note,
         @NotNull
-        float subtotal,
+        Float subtotal,
         @NotNull
-        float shippingFee,
+        Float shippingFee,
         @NotNull
-        float discountAmount,
+        Float discountAmount,
         @NotNull
-        float totalAmount,
+        Float totalAmount,
         @NotNull
         UUID shippingAddressId,
         UUID platformVoucherId,

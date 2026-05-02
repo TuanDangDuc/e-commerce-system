@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Data;
 
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -26,6 +27,7 @@ public class Vouchers {
     private Integer usedCount;
     private Boolean isActive;
     private Scope scope;
-    private Shops shop;
     private Orders platformOrder;
+    private Shops shops;
+    private Users users;
 }
